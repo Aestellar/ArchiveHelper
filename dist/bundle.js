@@ -5311,9 +5311,7 @@ function App(props) {
       Object.keys(inputObject).forEach(iKey => {
         transformedObject[iKey] = inputObject[iKey];
       });
-      //   transformedObject[key] = inputFieldsMap[key];
     });
-
     setTemplateMap(transformedObject);
     console.log("Transformed keys", transformedObject);
   }, [inputFieldsMap]);
@@ -5328,21 +5326,32 @@ function App(props) {
   }, [inputFieldList]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _style_css__WEBPACK_IMPORTED_MODULE_6__["default"].mainContainer
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Templater"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PresetsPane_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    getValuesFromForm: () => {
+      return inputFieldList;
+    },
+    sendValuesToForm: savedValues => {
+      setInputFieldList(savedValues);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _style_css__WEBPACK_IMPORTED_MODULE_6__["default"].inputContainer
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u0428\u0430\u0431\u043B\u043E\u043D\u0438\u0437\u0430\u0442\u043E\u0440"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _style_css__WEBPACK_IMPORTED_MODULE_6__["default"].fileInputContainer
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     style: {
       "fontSize": "20px"
     },
     type: "file",
     id: "doc",
     accept: ".docx"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: addInputField
-  }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u043B\u0435 \u0448\u0430\u0431\u043B\u043E\u043D\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generateButton_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generateButton_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     generateCallback: generateDocument
-  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_InputList_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: addInputField
+  }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u043B\u0435 \u0448\u0430\u0431\u043B\u043E\u043D\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_InputList_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     xczdsalist: inputFieldList,
     onChangeCallback: handleChange
-  }));
+  })));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
@@ -5372,7 +5381,8 @@ function InputList(props) {
       key: date,
       onChangeCallback: props.onChangeCallback,
       labelName: "\u0428\u0430\u0431\u043B\u043E\u043D",
-      labelValue: "\u0417\u043D\u0430\u0447\u0435\u043D\u0438\u0435"
+      labelValue: "\u0417\u043D\u0430\u0447\u0435\u043D\u0438\u0435",
+      length: "32"
     });
   })));
 }
@@ -5397,14 +5407,28 @@ function PresetsPane(props) {
   const [templatesFields, setTemplatesFields] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   props.getValuesFromForm;
   props.sendValuesToForm;
-  function saveToLocalStorage() {}
-  function loadFromLocalStorage() {}
+  function saveToLocalStorage() {
+    let values = props.getValuesFromForm();
+    let stringifiedValues = JSON.stringify(values);
+    console.log("To local storage", values, stringifiedValues);
+    localStorage.setItem("templates", stringifiedValues);
+  }
+  function loadFromLocalStorage() {
+    let savedValues = props.getValuesFromForm();
+    let stringifiedValues = JSON.stringify(savedValues);
+    console.log("Loaded str", savedValues, stringifiedValues);
+    // let restoredValues = JSON.parse(stringifiedValues);
+    let restoredValues = localStorage.getItem("templates") || [];
+    restoredValues = JSON.parse(restoredValues);
+    console.log("Restored values", savedValues, restoredValues);
+    props.sendValuesToForm(restoredValues);
+  }
   function cleanLocalStorage() {}
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Button, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: saveToLocalStorage
-  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Button, {
+  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: loadFromLocalStorage
-  }, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Button, {
+  }, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: cleanLocalStorage
   }, "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"));
 }
@@ -5484,14 +5508,13 @@ function InputField(props) {
   }, props.labelName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     id: props.inputID,
-    minLength: props.minLength,
     onChange: handleNameChange
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     htmlFor: props.inputID + "Value"
   }, props.labelValue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     id: props.inputID + "Value",
-    minLength: props.minLength,
+    size: props.length,
     onChange: handleValueChange
   }));
 }
@@ -5692,6 +5715,10 @@ div button{
     font-size: 20px;
 }
 
+.J7xQ7VHE_GItyBQTJ9_I{
+    text-align: center;
+}
+
 .ItourmMtefo1XjDifJzz{
     background-color: #FAEED1;
     margin: 0 auto; 
@@ -5699,14 +5726,20 @@ div button{
     padding-left: 10px;
     padding-right: 10px;
     text-align: center;
+    border: solid 1px #6c6349;
 }
-
+.f_HzhRYvTI5B7xwvyZap{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
 div button{
     margin: 10px;
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,yBAAyB;IACzB,aAAa;AACjB;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,yBAAyB;IACzB,cAAc;IACd,iBAAiB;IACjB,kBAAkB;IAClB,mBAAmB;IACnB,kBAAkB;AACtB;;AAEA;IACI,YAAY;AAChB","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\nbody>div{\r\n    background-color: #FDF7E4;\r\n    display: flex;\r\n}\r\n\r\ndiv button{\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer{\r\n    background-color: #FAEED1;\r\n    margin: 0 auto; \r\n    min-height:1080px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    text-align: center;\r\n}\r\n\r\ndiv button{\r\n    margin: 10px;\r\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,yBAAyB;IACzB,aAAa;AACjB;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,yBAAyB;IACzB,cAAc;IACd,iBAAiB;IACjB,kBAAkB;IAClB,mBAAmB;IACnB,kBAAkB;IAClB,yBAAyB;AAC7B;AACA;IACI,gBAAgB;IAChB,mBAAmB;AACvB;AACA;IACI,YAAY;AAChB","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\nbody>div{\r\n    background-color: #FDF7E4;\r\n    display: flex;\r\n}\r\n\r\ndiv button{\r\n    font-size: 20px;\r\n}\r\n\r\n.inputContainer{\r\n    text-align: center;\r\n}\r\n\r\n.mainContainer{\r\n    background-color: #FAEED1;\r\n    margin: 0 auto; \r\n    min-height:1080px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    text-align: center;\r\n    border: solid 1px #6c6349;\r\n}\r\n.fileInputContainer{\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n}\r\ndiv button{\r\n    margin: 10px;\r\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
-	"mainContainer": `ItourmMtefo1XjDifJzz`
+	"inputContainer": `J7xQ7VHE_GItyBQTJ9_I`,
+	"mainContainer": `ItourmMtefo1XjDifJzz`,
+	"fileInputContainer": `f_HzhRYvTI5B7xwvyZap`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
