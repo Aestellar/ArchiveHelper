@@ -5290,7 +5290,10 @@ __webpack_require__.r(__webpack_exports__);
 function App(props) {
   const [inputFieldsMap, setInputFieldsMap] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
   const [templateMap, setTemplateMap] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
-  const [inputFieldList, setInputFieldList] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([Date.now()]);
+  const [inputFieldList, setInputFieldList] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
+    id: Date.now(),
+    value: ""
+  }]);
   function handleChange(resultObj, inputID) {
     console.log("resultObj,inputID", resultObj, inputID);
     setInputFieldsMap({
@@ -5318,11 +5321,22 @@ function App(props) {
   function generateDocument(file) {
     (0,_utils_docx_generator_js__WEBPACK_IMPORTED_MODULE_1__["default"])(file, templateMap);
   }
-  function addInputField() {
-    setInputFieldList([...inputFieldList, Date.now()]);
+  function addInputField(text) {
+    setInputFieldList([...inputFieldList, {
+      id: Date.now(),
+      value: ""
+    }]);
   }
   react__WEBPACK_IMPORTED_MODULE_0___default().useEffect(() => {
     console.log("inputFieldList", inputFieldList);
+    let mp = {};
+    inputFieldList.forEach(el => {
+      if (inputFieldsMap.hasOwnProperty(el.id)) {
+        mp[el.id] = inputFieldsMap[el.id];
+      }
+    });
+    setInputFieldsMap(mp);
+    //  inputFieldsMap.filter((id)=>{ if()})
   }, [inputFieldList]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _style_css__WEBPACK_IMPORTED_MODULE_6__["default"].mainContainer
@@ -5375,10 +5389,12 @@ __webpack_require__.r(__webpack_exports__);
 
 function InputList(props) {
   // console.log(props, props.xczdsalist, "xczdsalist", props.posts);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, props.xczdsalist.map((date, index) => {
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, props.xczdsalist.map((inputObject, index) => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_inputField_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      inputID: date,
-      key: date,
+      inputID: inputObject.id,
+      key: inputObject.id + index,
+      defValue: inputObject.value,
       onChangeCallback: props.onChangeCallback,
       labelName: "\u0428\u0430\u0431\u043B\u043E\u043D",
       labelValue: "\u0417\u043D\u0430\u0447\u0435\u043D\u0438\u0435",
@@ -5403,8 +5419,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
+
 function PresetsPane(props) {
   const [templatesFields, setTemplatesFields] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [textWithTemplates, setTextWithTemplates] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   props.getValuesFromForm;
   props.sendValuesToForm;
   function saveToLocalStorage() {
@@ -5424,13 +5442,40 @@ function PresetsPane(props) {
     props.sendValuesToForm(restoredValues);
   }
   function cleanLocalStorage() {}
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  function fromText() {
+    let templateList = textWithTemplates.match(/{[А-ЯЁ_A-Z]*}/g);
+    console.log("From text", textWithTemplates, templateList);
+    if (templateList) {
+      templateList = Array.from(new Set(templateList));
+      templateList = templateList.map(t => t.replace(/[{}]/g, ""));
+      let resultValues = templateList.map((t, i) => {
+        return {
+          id: Date.now() + i,
+          value: t
+        };
+      });
+      console.log("resultValues", resultValues);
+      props.sendValuesToForm(resultValues);
+    } else {
+      props.sendValuesToForm([]);
+    }
+  }
+  function updateText(e) {
+    // debugger
+    const text = e.target.value;
+    setTextWithTemplates(text);
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: saveToLocalStorage
   }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: loadFromLocalStorage
   }, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: cleanLocalStorage
-  }, "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"));
+  }, "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: fromText
+  }, "\u0418\u0437 \u0442\u0435\u043A\u0441\u0442\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
+    onChange: updateText
+  })));
 }
 
 /***/ }),
@@ -5485,8 +5530,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function InputField(props) {
-  const [name, setName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
-  const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const [name, setName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.defValue);
+  const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(" ");
   function createInputObject() {
     return {
       [name]: value
@@ -5501,6 +5546,13 @@ function InputField(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     props.onChangeCallback(createInputObject(), props.inputID);
   }, [name, value]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    props.onChangeCallback(createInputObject(), props.inputID);
+  }, []);
+  // useEffect(()=>{
+  //     setName(props.defValue);
+  // },[])
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _css_inputField_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].inputFieldCSS
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
@@ -5508,6 +5560,7 @@ function InputField(props) {
   }, props.labelName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     id: props.inputID,
+    value: name,
     onChange: handleNameChange
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     htmlFor: props.inputID + "Value"
@@ -5670,9 +5723,14 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Key078Gyra_mLgj86v52 {
     font-size: 30px;
 }
 
+.Key078Gyra_mLgj86v52 input {
+    margin: 10px 10px 0 10px;
+}
 .Key078Gyra_mLgj86v52 label{
     margin: 10px;
-}`, "",{"version":3,"sources":["webpack://./src/components/css/inputField.module.css"],"names":[],"mappings":"AAAA;IACI,wBAAwB;;IAExB,eAAe;AACnB;;AAEA;IACI,YAAY;AAChB","sourcesContent":[".inputFieldCSS {\r\n    margin: 10px 10px 0 10px;\r\n\r\n    font-size: 30px;\r\n}\r\n\r\n.inputFieldCSS label{\r\n    margin: 10px;\r\n}"],"sourceRoot":""}]);
+}
+
+`, "",{"version":3,"sources":["webpack://./src/components/css/inputField.module.css"],"names":[],"mappings":"AAAA;IACI,wBAAwB;;IAExB,eAAe;AACnB;;AAEA;IACI,wBAAwB;AAC5B;AACA;IACI,YAAY;AAChB","sourcesContent":[".inputFieldCSS {\r\n    margin: 10px 10px 0 10px;\r\n\r\n    font-size: 30px;\r\n}\r\n\r\n.inputFieldCSS input {\r\n    margin: 10px 10px 0 10px;\r\n}\r\n.inputFieldCSS label{\r\n    margin: 10px;\r\n}\r\n\r\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"inputFieldCSS": `Key078Gyra_mLgj86v52`
