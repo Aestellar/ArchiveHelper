@@ -5561,6 +5561,7 @@ function InputField(props) {
     type: "text",
     id: props.inputID,
     value: name,
+    tabIndex: "-1",
     onChange: handleNameChange
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     htmlFor: props.inputID + "Value"
