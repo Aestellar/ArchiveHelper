@@ -5563,7 +5563,7 @@ function PresetsPane(props) {
     className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].presetsButtonsContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     htmlFor: "NamingFileStyle"
-  }, "\u0418\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435 \u0424\u0430\u0439\u043B\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }, "\u041D\u0430\u0438\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     name: "NamingFileStyle",
     onChange: e => {
@@ -5836,17 +5836,20 @@ div button {
     grid-column-gap: 20px;
     color: var(--main-figure-color);
     margin: 0 auto;
+    margin-top:20px;
     min-height: 100vh;
     min-width: 768px;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 120px;
     text-align: center;
-    border: solid 1px #6c6349;
+
+    
 }
 
 .dBqL4_GQuOSlEwDsiXMQ {
     background-color: var(--main-fg-color);
+    border: solid 1px #6c6349;
 }
 
 .haO7t0d381wmozuVGNYO {
@@ -5854,6 +5857,7 @@ div button {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    border: solid 1px #6c6349;
 }
 
 
@@ -5880,6 +5884,7 @@ div button {
 }
 
 .vTFYbNGcNKZva4zji8a6 {
+    padding: 10px;
     display: flex;
     flex-direction: column;
 }
@@ -5892,7 +5897,11 @@ div button {
 .EW0qEw7f7y889PjvpfPU {
     display: flex;
     flex-direction: column;
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,wBAAwB;IACxB,6BAA6B;IAC7B,wBAAwB;;IAExB,yBAAyB;AAC7B;;AAEA;IACI,SAAS;IACT,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,sCAAsC;IACtC,qBAAqB;IACrB,+BAA+B;IAC/B,cAAc;IACd,iBAAiB;IACjB,gBAAgB;IAChB,kBAAkB;IAClB,mBAAmB;IACnB,qBAAqB;IACrB,kBAAkB;IAClB,yBAAyB;AAC7B;;AAEA;IACI,sCAAsC;AAC1C;;AAEA;IACI,sCAAsC;IACtC,aAAa;IACb,sBAAsB;IACtB,2BAA2B;AAC/B;;;;;AAKA;IACI,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,8BAA8B;AAClC;;AAEA;IACI,eAAe;IACf,uBAAuB;;AAE3B;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\n:root {\r\n    --main-fg-color: #fbfbfb;\r\n    /* --main-fg-color:#f2f2f2; */\r\n    --main-bg-color: #f2f2f2;\r\n    ;\r\n    --main-figure-color: #333;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: var(--main-bg-color);\r\n}\r\n\r\ndiv button {\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 3fr;\r\n    background-color: var(--main-bg-color);\r\n    grid-column-gap: 20px;\r\n    color: var(--main-figure-color);\r\n    margin: 0 auto;\r\n    min-height: 100vh;\r\n    min-width: 768px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    padding-bottom: 120px;\r\n    text-align: center;\r\n    border: solid 1px #6c6349;\r\n}\r\n\r\n.templatesContainer {\r\n    background-color: var(--main-fg-color);\r\n}\r\n\r\n.presetsSideBarContainer {\r\n    background-color: var(--main-fg-color);\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n}\r\n\r\n\r\n\r\n\r\n.fileInputContainer {\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\ndiv button {\r\n    margin: 10px;\r\n}\r\n\r\n.inputListContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n}\r\n\r\n.inputListLabel {\r\n    font-size: 30px;\r\n    justify-content: center;\r\n\r\n}\r\n\r\n.presetsButtonsContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.textParseArea {\r\n    resize: vertical;\r\n    width: 300px;\r\n}\r\n\r\n.textParseAreaContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}"],"sourceRoot":""}]);
+}
+
+.JzqAU6rzmQupL8EIYNH8 {
+    font-size: 20px;
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,wBAAwB;IACxB,6BAA6B;IAC7B,wBAAwB;;IAExB,yBAAyB;AAC7B;;AAEA;IACI,SAAS;IACT,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,sCAAsC;IACtC,qBAAqB;IACrB,+BAA+B;IAC/B,cAAc;IACd,eAAe;IACf,iBAAiB;IACjB,gBAAgB;IAChB,kBAAkB;IAClB,mBAAmB;IACnB,qBAAqB;IACrB,kBAAkB;;;AAGtB;;AAEA;IACI,sCAAsC;IACtC,yBAAyB;AAC7B;;AAEA;IACI,sCAAsC;IACtC,aAAa;IACb,sBAAsB;IACtB,2BAA2B;IAC3B,yBAAyB;AAC7B;;;;;AAKA;IACI,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,8BAA8B;AAClC;;AAEA;IACI,eAAe;IACf,uBAAuB;;AAE3B;;AAEA;IACI,aAAa;IACb,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,eAAe;AACnB","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\n:root {\r\n    --main-fg-color: #fbfbfb;\r\n    /* --main-fg-color:#f2f2f2; */\r\n    --main-bg-color: #f2f2f2;\r\n    ;\r\n    --main-figure-color: #333;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: var(--main-bg-color);\r\n}\r\n\r\ndiv button {\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 3fr;\r\n    background-color: var(--main-bg-color);\r\n    grid-column-gap: 20px;\r\n    color: var(--main-figure-color);\r\n    margin: 0 auto;\r\n    margin-top:20px;\r\n    min-height: 100vh;\r\n    min-width: 768px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    padding-bottom: 120px;\r\n    text-align: center;\r\n\r\n    \r\n}\r\n\r\n.templatesContainer {\r\n    background-color: var(--main-fg-color);\r\n    border: solid 1px #6c6349;\r\n}\r\n\r\n.presetsSideBarContainer {\r\n    background-color: var(--main-fg-color);\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n    border: solid 1px #6c6349;\r\n}\r\n\r\n\r\n\r\n\r\n.fileInputContainer {\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\ndiv button {\r\n    margin: 10px;\r\n}\r\n\r\n.inputListContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n}\r\n\r\n.inputListLabel {\r\n    font-size: 30px;\r\n    justify-content: center;\r\n\r\n}\r\n\r\n.presetsButtonsContainer {\r\n    padding: 10px;\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.textParseArea {\r\n    resize: vertical;\r\n    width: 300px;\r\n}\r\n\r\n.textParseAreaContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.NamingFileStyle {\r\n    font-size: 20px;\r\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"mainContainer": `ItourmMtefo1XjDifJzz`,
@@ -5903,7 +5912,8 @@ ___CSS_LOADER_EXPORT___.locals = {
 	"inputListLabel": `Y5U9J2I8FTuWILDMzUfv`,
 	"presetsButtonsContainer": `vTFYbNGcNKZva4zji8a6`,
 	"textParseArea": `yAbVBkeh7U3c8gwqdRoF`,
-	"textParseAreaContainer": `EW0qEw7f7y889PjvpfPU`
+	"textParseAreaContainer": `EW0qEw7f7y889PjvpfPU`,
+	"NamingFileStyle": `JzqAU6rzmQupL8EIYNH8`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
