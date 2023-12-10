@@ -5278,7 +5278,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_InputList_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/InputList.jsx */ "./src/components/InputList.jsx");
 /* harmony import */ var _components_InputField_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/InputField.jsx */ "./src/components/InputField.jsx");
 /* harmony import */ var _components_PresetsPane_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/PresetsPane.jsx */ "./src/components/PresetsPane.jsx");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/storageManager.js */ "./src/utils/storageManager.js");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
 
 
 
@@ -5287,14 +5288,16 @@ __webpack_require__.r(__webpack_exports__);
 
 // import PostList from "./components/PostList.jsx";
 
+
 function App(props) {
   const [inputFieldsMap, setInputFieldsMap] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
   const [templateMap, setTemplateMap] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
   const [inputFieldList, setInputFieldList] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
     id: Date.now(),
-    value: ""
+    value: "",
+    textValue: ""
   }]);
-  const [namingConventionState, setNamingConventionState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const [namingConventionState, setNamingConventionState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_utils_storageManager_js__WEBPACK_IMPORTED_MODULE_6__.loadNamingConvention() || "");
   function handleChange(resultObj, inputID) {
     console.log("resultObj,inputID", resultObj, inputID);
     setInputFieldsMap({
@@ -5325,7 +5328,8 @@ function App(props) {
   function addInputField(text) {
     setInputFieldList([...inputFieldList, {
       id: Date.now(),
-      value: ""
+      value: "",
+      textValue: ""
     }]);
   }
   react__WEBPACK_IMPORTED_MODULE_0___default().useEffect(() => {
@@ -5355,11 +5359,13 @@ function App(props) {
   function onNamingChangeCallback(nameConvention) {
     setNamingConventionState(nameConvention);
     console.log("New naming convention", namingConventionState);
+    _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_6__.saveNamingConvention(nameConvention);
     generateFileName();
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _style_css__WEBPACK_IMPORTED_MODULE_6__["default"].mainContainer
+    className: _style_css__WEBPACK_IMPORTED_MODULE_7__["default"].mainContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PresetsPane_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    nameConvention: namingConventionState,
     onNamingChange: onNamingChangeCallback,
     getValuesFromForm: () => {
       return inputFieldList;
@@ -5368,9 +5374,9 @@ function App(props) {
       setInputFieldList(savedValues);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _style_css__WEBPACK_IMPORTED_MODULE_6__["default"].templatesContainer
+    className: _style_css__WEBPACK_IMPORTED_MODULE_7__["default"].templatesContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u0428\u0430\u0431\u043B\u043E\u043D\u0438\u0437\u0430\u0442\u043E\u0440"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _style_css__WEBPACK_IMPORTED_MODULE_6__["default"].fileInputContainer
+    className: _style_css__WEBPACK_IMPORTED_MODULE_7__["default"].fileInputContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     style: {
       "fontSize": "20px"
@@ -5409,7 +5415,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function InputField(props) {
   const [name, setName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.defValue);
-  const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(" ");
+  const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.textDefValue);
   function createInputObject() {
     return {
       [name]: value
@@ -5445,6 +5451,7 @@ function InputField(props) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     id: props.inputID + "Value",
+    value: value,
     size: props.length,
     onChange: handleValueChange
   })));
@@ -5485,6 +5492,7 @@ function InputList(props) {
       inputID: inputObject.id,
       key: inputObject.id + index,
       defValue: inputObject.value,
+      textDefValue: inputObject.textValue,
       onChangeCallback: props.onChangeCallback,
       labelName: "\u0428\u0430\u0431\u043B\u043E\u043D",
       labelValue: "\u0417\u043D\u0430\u0447\u0435\u043D\u0438\u0435",
@@ -5508,13 +5516,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
+/* harmony import */ var _utils_textParsers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/textParsers */ "./src/utils/textParsers.js");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
+
 
 
 
 function PresetsPane(props) {
   const [templatesFields, setTemplatesFields] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [textWithTemplates, setTextWithTemplates] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const [textToParse, setTextToParse] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   props.getValuesFromForm;
   props.sendValuesToForm;
   function saveToLocalStorage() {
@@ -5535,32 +5545,65 @@ function PresetsPane(props) {
   }
   function cleanLocalStorage() {}
   function fromText() {
-    let templateList = textWithTemplates.match(/{[А-ЯЁ_A-Z]*}/g);
-    console.log("From text", textWithTemplates, templateList);
+    let templateList = textToParse.match(/{[А-ЯЁ_A-Z]*}/g);
+    console.log("From text", textToParse, templateList);
     if (templateList) {
-      templateList = Array.from(new Set(templateList));
-      templateList = templateList.map(t => t.replace(/[{}]/g, ""));
-      let resultValues = templateList.map((t, i) => {
-        return {
-          id: Date.now() + i,
-          value: t
-        };
-      });
-      console.log("resultValues", resultValues);
+      let resultValues = generateTemplates(templateList);
       props.sendValuesToForm(resultValues);
     } else {
       props.sendValuesToForm([]);
     }
   }
+  function generateTemplates(templateList) {
+    templateList = Array.from(new Set(templateList));
+    templateList = templateList.map(t => t.replace(/[{}]/g, ""));
+    let resultValues = templateList.map((t, i) => {
+      return {
+        id: Date.now() + i,
+        value: t
+      };
+    });
+    console.log("resultValues", resultValues);
+    return resultValues;
+  }
+  function generateTemplatesWithText(templateTextObject) {
+    // templateTextObject = Array.from(new Set(templateTextObject));
+    // templateList = templateList.map(t => t.replace(/[{}]/g, ""));
+    let resultValues = [];
+    resultValues = Object.keys(templateTextObject).map((e, i) => {
+      return {
+        id: Date.now() + i,
+        value: e,
+        textValue: templateTextObject[e]
+      };
+    });
+    // for(let i = 0; i>templateTextObject in templateTextObject){
+    //     resultValues = templateTextObject.map((t, i) => { return { id: Date.now() + i, value: t } });
+    // }
+
+    console.log("resultValues", resultValues);
+    return resultValues;
+  }
+  function parseBirthday() {
+    // const parsedObject = Parser.parseBirth(templatesFields);
+    let r = _utils_textParsers__WEBPACK_IMPORTED_MODULE_1__.parseBirth(textToParse);
+    console.log(r, Object.getOwnPropertyNames(r));
+    const templates = generateTemplatesWithText(r);
+    console.log(r, Object.getOwnPropertyNames(r), templates, Object.values(r));
+    props.sendValuesToForm(templates, Object.values(r));
+    // Parser.parseBirth(templatesFields);
+    // console.log(parsedObject);
+  }
+
   function updateText(e) {
     // debugger
     const text = e.target.value;
-    setTextWithTemplates(text);
+    setTextToParse(text);
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].presetsSideBarContainer
+    className: _style_css__WEBPACK_IMPORTED_MODULE_2__["default"].presetsSideBarContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].presetsButtonsContainer
+    className: _style_css__WEBPACK_IMPORTED_MODULE_2__["default"].presetsButtonsContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     htmlFor: "NamingFileStyle"
   }, "\u041D\u0430\u0438\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -5569,7 +5612,8 @@ function PresetsPane(props) {
     onChange: e => {
       props.onNamingChange(e.target.value);
     },
-    id: "NamingFileStyle"
+    id: "NamingFileStyle",
+    value: props.nameConvention
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: saveToLocalStorage
   }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
@@ -5578,8 +5622,10 @@ function PresetsPane(props) {
     onClick: cleanLocalStorage
   }, "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: fromText
-  }, "\u0418\u0437 \u0442\u0435\u043A\u0441\u0442\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
-    className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].textParseArea,
+  }, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0448\u0430\u0431\u043B\u043E\u043D\u044B \u0438\u0437 \u0442\u0435\u043A\u0441\u0442\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: parseBirthday
+  }, "\u0420\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u0435")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
+    className: _style_css__WEBPACK_IMPORTED_MODULE_2__["default"].textParseArea,
     onChange: updateText
   })));
 }
@@ -5741,6 +5787,79 @@ function generateDocument(file, templateMap, filename) {
 
 /***/ }),
 
+/***/ "./src/utils/storageManager.js":
+/*!*************************************!*\
+  !*** ./src/utils/storageManager.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   loadNamingConvention: () => (/* binding */ loadNamingConvention),
+/* harmony export */   saveNamingConvention: () => (/* binding */ saveNamingConvention)
+/* harmony export */ });
+function saveNamingConvention(namingConvention) {
+  localStorage.setItem("naming_convention", namingConvention);
+}
+function loadNamingConvention() {
+  return localStorage.getItem("naming_convention");
+}
+
+/***/ }),
+
+/***/ "./src/utils/textParsers.js":
+/*!**********************************!*\
+  !*** ./src/utils/textParsers.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   parseBirth: () => (/* binding */ parseBirth),
+/* harmony export */   testParseBirth: () => (/* binding */ testParseBirth)
+/* harmony export */ });
+const testBirthString = `182 5 124 Л123об-152
+1904 №32 Апрель Р2 К5 Мелания
+Родители такие-то
+Воспреемники такие-то
+Священник такой-то
+Диакон такой-то`;
+function parseBirth(birthText) {
+  if (!birthText) return;
+  console.log("birthText", birthText);
+  const entryAddressStringReg = /([а-я0-9А-Я]+)/g;
+  const birthStringList = birthText.split("\n");
+  const entryAddressString = birthStringList[0];
+  const birthString = birthStringList[1];
+  const parentsString = birthStringList[2];
+  const godparentsString = birthStringList[3];
+  const pristsString = birthStringList.slice(4).join(" ");
+  let parsedSet = {};
+  parsedSet["{ФОНД}"] = entryAddressString.match(entryAddressStringReg)[0];
+  parsedSet["{ОПИСЬ}"] = entryAddressString.match(entryAddressStringReg)[1];
+  parsedSet["{ДЕЛО}"] = entryAddressString.match(entryAddressStringReg)[2];
+  parsedSet["{ЛИСТЫ}"] = entryAddressString.match(entryAddressStringReg)[3] + "-" + entryAddressString.match(entryAddressStringReg)[4];
+  let birthYear = birthString.match(/([0-9]){4}/g)[0];
+  parsedSet["{ГОД_РОЖДЕНИЯ}"] = birthYear;
+  parsedSet["{НОМЕР_РОЖДЕНИЯ}"] = birthString.match(/(№[0-9]+)/g)[0];
+  let birthMonth = birthString.match(/([яЯ]нвар[ьея]|[фФ]еврал[ьея]|[мМ]арт[еа]?|[аА]прел[ьея]|[мМ]а[йея]|[иИ]ю[нл][яье]|[аА]вгуст[еа]?|(?:[сС]ент|[оО]кт|[нН]о|[дД]ек)[ая]бр[яье])/g);
+  parsedSet["{ЧИСЛОМЕСЯЦ_РОЖДЕНИЯ}"] = (birthMonth + " " + birthString.match(/(Р[0-9]+)/g)).replace("Р", "");
+  parsedSet["{ЧИСЛОМЕСЯЦ_КРЕЩЕНИЯ}"] = (birthMonth + " " + birthString.match(/(К[0-9]+)/g)).replace("К", "");
+  parsedSet["{ИМЯ_РОЖДЁННОГО}"] = birthString.match(/([А-Я][а-яё]+)(s+)*$/g)[0];
+  parsedSet["{РОДИТЕЛИ}"] = parentsString;
+  parsedSet["{ВОСПРИЕМНИКИ}"] = godparentsString;
+  parsedSet["{СОВЕРШИВШИЕ_КРЕЩЕНИЕ}"] = pristsString;
+  return parsedSet;
+}
+function testParseBirth() {
+  console.log(parseBirth(testBirthString));
+  return parseBirth(testBirthString);
+}
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/components/css/inputField.module.css":
 /*!********************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/components/css/inputField.module.css ***!
@@ -5850,6 +5969,7 @@ div button {
 .dBqL4_GQuOSlEwDsiXMQ {
     background-color: var(--main-fg-color);
     border: solid 1px #6c6349;
+    padding-bottom: 40px;
 }
 
 .haO7t0d381wmozuVGNYO {
@@ -5901,7 +6021,7 @@ div button {
 
 .JzqAU6rzmQupL8EIYNH8 {
     font-size: 20px;
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,wBAAwB;IACxB,6BAA6B;IAC7B,wBAAwB;;IAExB,yBAAyB;AAC7B;;AAEA;IACI,SAAS;IACT,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,sCAAsC;IACtC,qBAAqB;IACrB,+BAA+B;IAC/B,cAAc;IACd,eAAe;IACf,iBAAiB;IACjB,gBAAgB;IAChB,kBAAkB;IAClB,mBAAmB;IACnB,qBAAqB;IACrB,kBAAkB;;;AAGtB;;AAEA;IACI,sCAAsC;IACtC,yBAAyB;AAC7B;;AAEA;IACI,sCAAsC;IACtC,aAAa;IACb,sBAAsB;IACtB,2BAA2B;IAC3B,yBAAyB;AAC7B;;;;;AAKA;IACI,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,8BAA8B;AAClC;;AAEA;IACI,eAAe;IACf,uBAAuB;;AAE3B;;AAEA;IACI,aAAa;IACb,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,eAAe;AACnB","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\n:root {\r\n    --main-fg-color: #fbfbfb;\r\n    /* --main-fg-color:#f2f2f2; */\r\n    --main-bg-color: #f2f2f2;\r\n    ;\r\n    --main-figure-color: #333;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: var(--main-bg-color);\r\n}\r\n\r\ndiv button {\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 3fr;\r\n    background-color: var(--main-bg-color);\r\n    grid-column-gap: 20px;\r\n    color: var(--main-figure-color);\r\n    margin: 0 auto;\r\n    margin-top:20px;\r\n    min-height: 100vh;\r\n    min-width: 768px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    padding-bottom: 120px;\r\n    text-align: center;\r\n\r\n    \r\n}\r\n\r\n.templatesContainer {\r\n    background-color: var(--main-fg-color);\r\n    border: solid 1px #6c6349;\r\n}\r\n\r\n.presetsSideBarContainer {\r\n    background-color: var(--main-fg-color);\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n    border: solid 1px #6c6349;\r\n}\r\n\r\n\r\n\r\n\r\n.fileInputContainer {\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\ndiv button {\r\n    margin: 10px;\r\n}\r\n\r\n.inputListContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n}\r\n\r\n.inputListLabel {\r\n    font-size: 30px;\r\n    justify-content: center;\r\n\r\n}\r\n\r\n.presetsButtonsContainer {\r\n    padding: 10px;\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.textParseArea {\r\n    resize: vertical;\r\n    width: 300px;\r\n}\r\n\r\n.textParseAreaContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.NamingFileStyle {\r\n    font-size: 20px;\r\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,wBAAwB;IACxB,6BAA6B;IAC7B,wBAAwB;;IAExB,yBAAyB;AAC7B;;AAEA;IACI,SAAS;IACT,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,sCAAsC;IACtC,qBAAqB;IACrB,+BAA+B;IAC/B,cAAc;IACd,eAAe;IACf,iBAAiB;IACjB,gBAAgB;IAChB,kBAAkB;IAClB,mBAAmB;IACnB,qBAAqB;IACrB,kBAAkB;;;AAGtB;;AAEA;IACI,sCAAsC;IACtC,yBAAyB;IACzB,oBAAoB;AACxB;;AAEA;IACI,sCAAsC;IACtC,aAAa;IACb,sBAAsB;IACtB,2BAA2B;IAC3B,yBAAyB;AAC7B;;;;;AAKA;IACI,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,8BAA8B;AAClC;;AAEA;IACI,eAAe;IACf,uBAAuB;;AAE3B;;AAEA;IACI,aAAa;IACb,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,eAAe;AACnB","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\n:root {\r\n    --main-fg-color: #fbfbfb;\r\n    /* --main-fg-color:#f2f2f2; */\r\n    --main-bg-color: #f2f2f2;\r\n    ;\r\n    --main-figure-color: #333;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: var(--main-bg-color);\r\n}\r\n\r\ndiv button {\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 3fr;\r\n    background-color: var(--main-bg-color);\r\n    grid-column-gap: 20px;\r\n    color: var(--main-figure-color);\r\n    margin: 0 auto;\r\n    margin-top:20px;\r\n    min-height: 100vh;\r\n    min-width: 768px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    padding-bottom: 120px;\r\n    text-align: center;\r\n\r\n    \r\n}\r\n\r\n.templatesContainer {\r\n    background-color: var(--main-fg-color);\r\n    border: solid 1px #6c6349;\r\n    padding-bottom: 40px;\r\n}\r\n\r\n.presetsSideBarContainer {\r\n    background-color: var(--main-fg-color);\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n    border: solid 1px #6c6349;\r\n}\r\n\r\n\r\n\r\n\r\n.fileInputContainer {\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\ndiv button {\r\n    margin: 10px;\r\n}\r\n\r\n.inputListContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n}\r\n\r\n.inputListLabel {\r\n    font-size: 30px;\r\n    justify-content: center;\r\n\r\n}\r\n\r\n.presetsButtonsContainer {\r\n    padding: 10px;\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.textParseArea {\r\n    resize: vertical;\r\n    width: 300px;\r\n}\r\n\r\n.textParseAreaContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.NamingFileStyle {\r\n    font-size: 20px;\r\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"mainContainer": `ItourmMtefo1XjDifJzz`,
