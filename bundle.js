@@ -5280,6 +5280,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PresetsPane_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/PresetsPane.jsx */ "./src/components/PresetsPane.jsx");
 /* harmony import */ var _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/storageManager.js */ "./src/utils/storageManager.js");
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/generatePane.jsx */ "./src/components/generatePane.jsx");
 
 
 
@@ -5287,6 +5288,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // import PostList from "./components/PostList.jsx";
+
 
 
 function App(props) {
@@ -5362,6 +5364,61 @@ function App(props) {
     _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_6__.saveNamingConvention(nameConvention);
     generateFileName();
   }
+  function sendValuesToForm(savedValues, update) {
+    if (!update) {
+      setInputFieldList(savedValues);
+    } else {
+      let resultObj = {};
+      let resultArray = [];
+      const inputFieldClone = JSON.parse(JSON.stringify(inputFieldList));
+      debugger;
+      // savedValues
+
+      const inputObject = {};
+      const savedObject = {};
+      for (let i = 0; i < inputFieldClone.length; i++) {
+        let iFO = inputFieldClone[i];
+        inputObject[iFO.value] = iFO;
+        //     for (let j = 0; j < savedValues.length; j++) {
+        //         let sIFO = savedValues[j];
+        //         if (!sIFO.originalFlag) {
+        //             if (sIFO.value === iFO.value) {
+        //                 // iFO.textValue = sIFO.textValue;
+        //                 sIFO.unoriginalFlag = true;
+        //                 iFO.unoriginalFlag = true;
+        //             }
+        //             else {
+        //                 sIFO.originalFlag = true;
+        //             }
+        //         }
+      }
+
+      for (let j = 0; j < savedValues.length; j++) {
+        let sIFO = savedValues[j];
+        inputObject[sIFO.value] = sIFO;
+      }
+      resultArray = Object.keys(inputObject).map(key => inputObject[key]);
+      //  inputObject.forEach((templateName,object)=>{resultArray.push(object)})
+
+      //     if (!iFO.unoriginalFlag) {
+      //         resultArray.push(iFO);
+      //     }
+
+      //     // resultObj[iFO.value] = [iFO];
+      // }
+
+      // for (let j = 0; j < savedValues.length; j++) {
+      //     let sIFO = savedValues[j];
+      //     if(!sIFO.unoriginalFlag){
+      //         if (sIFO.originalFlag) {
+      //             resultArray.push(sIFO);
+      //         }
+
+      //     }
+      // }
+      setInputFieldList(resultArray);
+    }
+  }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _style_css__WEBPACK_IMPORTED_MODULE_7__["default"].mainContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PresetsPane_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -5370,23 +5427,16 @@ function App(props) {
     getValuesFromForm: () => {
       return inputFieldList;
     },
-    sendValuesToForm: savedValues => {
-      setInputFieldList(savedValues);
-    }
+    sendValuesToForm: sendValuesToForm
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _style_css__WEBPACK_IMPORTED_MODULE_7__["default"].templatesContainer
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u0428\u0430\u0431\u043B\u043E\u043D\u0438\u0437\u0430\u0442\u043E\u0440"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _style_css__WEBPACK_IMPORTED_MODULE_7__["default"].fileInputContainer
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    style: {
-      "fontSize": "20px"
-    },
-    type: "file",
-    id: "doc",
-    accept: ".docx"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generateButton_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    generateCallback: generateDocument
-  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u0428\u0430\u0431\u043B\u043E\u043D\u0438\u0437\u0430\u0442\u043E\u0440"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    generateCallback: generateDocument,
+    fileElementId: "doc" + new Date().getTime()
+  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    generateCallback: generateDocument,
+    fileElementId: "doc" + 1
+  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: addInputField
   }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u043B\u0435 \u0448\u0430\u0431\u043B\u043E\u043D\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_InputList_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     xczdsalist: inputFieldList,
@@ -5544,12 +5594,12 @@ function PresetsPane(props) {
     props.sendValuesToForm(restoredValues);
   }
   function cleanLocalStorage() {}
-  function fromText() {
+  function fromText(updateFlag) {
     let templateList = textToParse.match(/{[А-ЯЁ_A-Z]*}/g);
-    console.log("From text", textToParse, templateList);
+    console.log("From text", textToParse, templateList, "updateFlag", updateFlag);
     if (templateList) {
       let resultValues = generateTemplates(templateList);
-      props.sendValuesToForm(resultValues);
+      props.sendValuesToForm(resultValues, updateFlag);
     } else {
       props.sendValuesToForm([]);
     }
@@ -5586,11 +5636,21 @@ function PresetsPane(props) {
   }
   function parseBirthday() {
     // const parsedObject = Parser.parseBirth(templatesFields);
-    let r = _utils_textParsers__WEBPACK_IMPORTED_MODULE_1__.parseBirth(textToParse);
-    console.log(r, Object.getOwnPropertyNames(r));
-    const templates = generateTemplatesWithText(r);
-    console.log(r, Object.getOwnPropertyNames(r), templates, Object.values(r));
-    props.sendValuesToForm(templates, Object.values(r));
+    let r;
+    try {
+      r = _utils_textParsers__WEBPACK_IMPORTED_MODULE_1__.parseBirth(textToParse);
+      console.log("Try to parse birthday", r);
+    } catch (e) {
+      console.log("failed to parse birthday", e);
+    }
+    if (r) {
+      r = _utils_textParsers__WEBPACK_IMPORTED_MODULE_1__.parseBirth(textToParse);
+      console.log(r, Object.getOwnPropertyNames(r));
+      const templates = generateTemplatesWithText(r);
+      console.log(r, Object.getOwnPropertyNames(r), templates, Object.values(r));
+      props.sendValuesToForm(templates, Object.values(r));
+    }
+
     // Parser.parseBirth(templatesFields);
     // console.log(parsedObject);
   }
@@ -5615,14 +5675,13 @@ function PresetsPane(props) {
     id: "NamingFileStyle",
     value: props.nameConvention
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: saveToLocalStorage
-  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: loadFromLocalStorage
-  }, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: cleanLocalStorage
-  }, "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C \u043F\u0440\u0435\u0441\u0435\u0442"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: fromText
-  }, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0448\u0430\u0431\u043B\u043E\u043D\u044B \u0438\u0437 \u0442\u0435\u043A\u0441\u0442\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C \u0448\u0430\u0431\u043B\u043E\u043D\u0430\u043C\u0438 \u0438\u0437 \u0442\u0435\u043A\u0441\u0442\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => {
+      console.log("Дополнить шаблонами из текста");
+      fromText(true);
+    }
+  }, "\u0414\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u044C \u0448\u0430\u0431\u043B\u043E\u043D\u0430\u043C\u0438 \u0438\u0437 \u0442\u0435\u043A\u0441\u0442\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: parseBirthday
   }, "\u0420\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u0435")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
     className: _style_css__WEBPACK_IMPORTED_MODULE_2__["default"].textParseArea,
@@ -5649,7 +5708,7 @@ __webpack_require__.r(__webpack_exports__);
 function GenerateButton(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: e => {
-      const docs = document.getElementById("doc");
+      const docs = document.getElementById(props.docID);
       console.log(`Файлов выбрано ${docs.files.length}`, docs.files);
       console.log("Generate element click");
       let file = docs.files.item(0);
@@ -5661,6 +5720,42 @@ function GenerateButton(props) {
       }
     }
   }, props.children);
+}
+
+/***/ }),
+
+/***/ "./src/components/generatePane.jsx":
+/*!*****************************************!*\
+  !*** ./src/components/generatePane.jsx ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GeneratePane)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_generateButton_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/generateButton.jsx */ "./src/components/generateButton.jsx");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
+
+
+
+function GeneratePane(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _style_css__WEBPACK_IMPORTED_MODULE_2__["default"].fileInputContainer
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    style: {
+      "fontSize": "20px"
+    },
+    type: "file",
+    id: props.fileElementId,
+    accept: ".docx"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generateButton_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    generateCallback: props.generateCallback,
+    docID: props.fileElementId
+  }, props.children)));
 }
 
 /***/ }),
