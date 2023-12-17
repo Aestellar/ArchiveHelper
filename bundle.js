@@ -5664,10 +5664,11 @@ function PresetsPane(props) {
     className: _style_css__WEBPACK_IMPORTED_MODULE_2__["default"].presetsSideBarContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _style_css__WEBPACK_IMPORTED_MODULE_2__["default"].presetsButtonsContainer
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     htmlFor: "NamingFileStyle"
-  }, "\u041D\u0430\u0438\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }, "\u041D\u0430\u0438\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
+    class: _style_css__WEBPACK_IMPORTED_MODULE_2__["default"].NamingFileStyle,
     name: "NamingFileStyle",
     onChange: e => {
       props.onNamingChange(e.target.value);
@@ -5675,15 +5676,15 @@ function PresetsPane(props) {
     id: "NamingFileStyle",
     value: props.nameConvention
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: fromText
-  }, "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C \u0448\u0430\u0431\u043B\u043E\u043D\u0430\u043C\u0438 \u0438\u0437 \u0442\u0435\u043A\u0441\u0442\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: parseBirthday
+  }, "\u0420\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u0435"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: () => {
       console.log("Дополнить шаблонами из текста");
       fromText(true);
     }
   }, "\u0414\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u044C \u0448\u0430\u0431\u043B\u043E\u043D\u0430\u043C\u0438 \u0438\u0437 \u0442\u0435\u043A\u0441\u0442\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: parseBirthday
-  }, "\u0420\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u0435")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
+    onClick: fromText
+  }, "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C \u0448\u0430\u0431\u043B\u043E\u043D\u0430\u043C\u0438 \u0438\u0437 \u0442\u0435\u043A\u0441\u0442\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
     className: _style_css__WEBPACK_IMPORTED_MODULE_2__["default"].textParseArea,
     onChange: updateText
   })));
@@ -5983,7 +5984,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Key078Gyra_mLgj86v52 {
 }
 
 .Key078Gyra_mLgj86v52 input {
-    margin: 10px 10px 0 10px;
+    /* margin: 10px 10px 0 10px; */
+    width: 100%;
 }
 .Key078Gyra_mLgj86v52 label{
     margin: 10px;
@@ -5991,7 +5993,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Key078Gyra_mLgj86v52 {
 
 /* .inputContainer{
   
-} */`, "",{"version":3,"sources":["webpack://./src/components/css/inputField.module.css"],"names":[],"mappings":"AAAA;IACI,wBAAwB;IACxB,aAAa;IACb,8BAA8B;IAC9B,eAAe;AACnB;;AAEA;IACI,wBAAwB;AAC5B;AACA;IACI,YAAY;AAChB;;AAEA;;GAEG","sourcesContent":[".inputFieldCSS {\r\n    margin: 10px 10px 0 10px;\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n    font-size: 30px;\r\n}\r\n\r\n.inputFieldCSS input {\r\n    margin: 10px 10px 0 10px;\r\n}\r\n.inputFieldCSS label{\r\n    margin: 10px;\r\n}\r\n\r\n/* .inputContainer{\r\n  \r\n} */"],"sourceRoot":""}]);
+} */`, "",{"version":3,"sources":["webpack://./src/components/css/inputField.module.css"],"names":[],"mappings":"AAAA;IACI,wBAAwB;IACxB,aAAa;IACb,8BAA8B;IAC9B,eAAe;AACnB;;AAEA;IACI,8BAA8B;IAC9B,WAAW;AACf;AACA;IACI,YAAY;AAChB;;AAEA;;GAEG","sourcesContent":[".inputFieldCSS {\r\n    margin: 10px 10px 0 10px;\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n    font-size: 30px;\r\n}\r\n\r\n.inputFieldCSS input {\r\n    /* margin: 10px 10px 0 10px; */\r\n    width: 100%;\r\n}\r\n.inputFieldCSS label{\r\n    margin: 10px;\r\n}\r\n\r\n/* .inputContainer{\r\n  \r\n} */"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"inputFieldCSS": `Key078Gyra_mLgj86v52`
@@ -6025,11 +6027,15 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* div {
  background-color: rgb(215, 236, 250);
 } */
 
+*{
+    box-sizing: border-box;
+}
+
 :root {
     --main-fg-color: #fbfbfb;
     /* --main-fg-color:#f2f2f2; */
     --main-bg-color: #f2f2f2;
-    ;
+
     --main-figure-color: #333;
 }
 
@@ -6057,8 +6063,6 @@ div button {
     padding-right: 10px;
     padding-bottom: 120px;
     text-align: center;
-
-    
 }
 
 .dBqL4_GQuOSlEwDsiXMQ {
@@ -6078,10 +6082,10 @@ div button {
 
 
 
-.f_HzhRYvTI5B7xwvyZap {
+/* .fileInputContainer {
     margin-top: 20px;
     margin-bottom: 10px;
-}
+} */
 
 div button {
     margin: 10px;
@@ -6115,14 +6119,15 @@ div button {
 }
 
 .JzqAU6rzmQupL8EIYNH8 {
-    font-size: 20px;
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,wBAAwB;IACxB,6BAA6B;IAC7B,wBAAwB;;IAExB,yBAAyB;AAC7B;;AAEA;IACI,SAAS;IACT,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,sCAAsC;IACtC,qBAAqB;IACrB,+BAA+B;IAC/B,cAAc;IACd,eAAe;IACf,iBAAiB;IACjB,gBAAgB;IAChB,kBAAkB;IAClB,mBAAmB;IACnB,qBAAqB;IACrB,kBAAkB;;;AAGtB;;AAEA;IACI,sCAAsC;IACtC,yBAAyB;IACzB,oBAAoB;AACxB;;AAEA;IACI,sCAAsC;IACtC,aAAa;IACb,sBAAsB;IACtB,2BAA2B;IAC3B,yBAAyB;AAC7B;;;;;AAKA;IACI,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,8BAA8B;AAClC;;AAEA;IACI,eAAe;IACf,uBAAuB;;AAE3B;;AAEA;IACI,aAAa;IACb,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,eAAe;AACnB","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\n:root {\r\n    --main-fg-color: #fbfbfb;\r\n    /* --main-fg-color:#f2f2f2; */\r\n    --main-bg-color: #f2f2f2;\r\n    ;\r\n    --main-figure-color: #333;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: var(--main-bg-color);\r\n}\r\n\r\ndiv button {\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 3fr;\r\n    background-color: var(--main-bg-color);\r\n    grid-column-gap: 20px;\r\n    color: var(--main-figure-color);\r\n    margin: 0 auto;\r\n    margin-top:20px;\r\n    min-height: 100vh;\r\n    min-width: 768px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    padding-bottom: 120px;\r\n    text-align: center;\r\n\r\n    \r\n}\r\n\r\n.templatesContainer {\r\n    background-color: var(--main-fg-color);\r\n    border: solid 1px #6c6349;\r\n    padding-bottom: 40px;\r\n}\r\n\r\n.presetsSideBarContainer {\r\n    background-color: var(--main-fg-color);\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n    border: solid 1px #6c6349;\r\n}\r\n\r\n\r\n\r\n\r\n.fileInputContainer {\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\ndiv button {\r\n    margin: 10px;\r\n}\r\n\r\n.inputListContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n}\r\n\r\n.inputListLabel {\r\n    font-size: 30px;\r\n    justify-content: center;\r\n\r\n}\r\n\r\n.presetsButtonsContainer {\r\n    padding: 10px;\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.textParseArea {\r\n    resize: vertical;\r\n    width: 300px;\r\n}\r\n\r\n.textParseAreaContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.NamingFileStyle {\r\n    font-size: 20px;\r\n}"],"sourceRoot":""}]);
+    /* font-size: 20px; */
+    margin-top: 10px;
+    width: 100%;
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,sBAAsB;AAC1B;;AAEA;IACI,wBAAwB;IACxB,6BAA6B;IAC7B,wBAAwB;;IAExB,yBAAyB;AAC7B;;AAEA;IACI,SAAS;IACT,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,sCAAsC;IACtC,qBAAqB;IACrB,+BAA+B;IAC/B,cAAc;IACd,eAAe;IACf,iBAAiB;IACjB,gBAAgB;IAChB,kBAAkB;IAClB,mBAAmB;IACnB,qBAAqB;IACrB,kBAAkB;AACtB;;AAEA;IACI,sCAAsC;IACtC,yBAAyB;IACzB,oBAAoB;AACxB;;AAEA;IACI,sCAAsC;IACtC,aAAa;IACb,sBAAsB;IACtB,2BAA2B;IAC3B,yBAAyB;AAC7B;;;;;AAKA;;;GAGG;;AAEH;IACI,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,8BAA8B;AAClC;;AAEA;IACI,eAAe;IACf,uBAAuB;;AAE3B;;AAEA;IACI,aAAa;IACb,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,qBAAqB;IACrB,gBAAgB;IAChB,WAAW;AACf","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\n*{\r\n    box-sizing: border-box;\r\n}\r\n\r\n:root {\r\n    --main-fg-color: #fbfbfb;\r\n    /* --main-fg-color:#f2f2f2; */\r\n    --main-bg-color: #f2f2f2;\r\n\r\n    --main-figure-color: #333;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: var(--main-bg-color);\r\n}\r\n\r\ndiv button {\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 3fr;\r\n    background-color: var(--main-bg-color);\r\n    grid-column-gap: 20px;\r\n    color: var(--main-figure-color);\r\n    margin: 0 auto;\r\n    margin-top:20px;\r\n    min-height: 100vh;\r\n    min-width: 768px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    padding-bottom: 120px;\r\n    text-align: center;\r\n}\r\n\r\n.templatesContainer {\r\n    background-color: var(--main-fg-color);\r\n    border: solid 1px #6c6349;\r\n    padding-bottom: 40px;\r\n}\r\n\r\n.presetsSideBarContainer {\r\n    background-color: var(--main-fg-color);\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n    border: solid 1px #6c6349;\r\n}\r\n\r\n\r\n\r\n\r\n/* .fileInputContainer {\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n} */\r\n\r\ndiv button {\r\n    margin: 10px;\r\n}\r\n\r\n.inputListContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n}\r\n\r\n.inputListLabel {\r\n    font-size: 30px;\r\n    justify-content: center;\r\n\r\n}\r\n\r\n.presetsButtonsContainer {\r\n    padding: 10px;\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.textParseArea {\r\n    resize: vertical;\r\n    width: 300px;\r\n}\r\n\r\n.textParseAreaContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.NamingFileStyle {\r\n    /* font-size: 20px; */\r\n    margin-top: 10px;\r\n    width: 100%;\r\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"mainContainer": `ItourmMtefo1XjDifJzz`,
 	"templatesContainer": `dBqL4_GQuOSlEwDsiXMQ`,
 	"presetsSideBarContainer": `haO7t0d381wmozuVGNYO`,
-	"fileInputContainer": `f_HzhRYvTI5B7xwvyZap`,
 	"inputListContainer": `MxFMEwvmXKJ8LQBLPByT`,
 	"inputListLabel": `Y5U9J2I8FTuWILDMzUfv`,
 	"presetsButtonsContainer": `vTFYbNGcNKZva4zji8a6`,
