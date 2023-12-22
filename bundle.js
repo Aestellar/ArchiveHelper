@@ -5278,9 +5278,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_InputList_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/InputList.jsx */ "./src/components/InputList.jsx");
 /* harmony import */ var _components_InputField_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/InputField.jsx */ "./src/components/InputField.jsx");
 /* harmony import */ var _components_PresetsPane_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/PresetsPane.jsx */ "./src/components/PresetsPane.jsx");
-/* harmony import */ var _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/storageManager.js */ "./src/utils/storageManager.js");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
-/* harmony import */ var _components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/generatePane.jsx */ "./src/components/generatePane.jsx");
+/* harmony import */ var _components_TextPresetsPane_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/TextPresetsPane.jsx */ "./src/components/TextPresetsPane.jsx");
+/* harmony import */ var _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/storageManager.js */ "./src/utils/storageManager.js");
+/* harmony import */ var _utils_templateParser_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils/templateParser.js */ "./src/utils/templateParser.js");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/generatePane.jsx */ "./src/components/generatePane.jsx");
+
 
 
 
@@ -5288,6 +5291,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // import PostList from "./components/PostList.jsx";
+
+
 
 
 
@@ -5299,7 +5304,7 @@ function App(props) {
     value: "",
     textValue: ""
   }]);
-  const [namingConventionState, setNamingConventionState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_utils_storageManager_js__WEBPACK_IMPORTED_MODULE_6__.loadNamingConvention() || "");
+  const [namingConventionState, setNamingConventionState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_utils_storageManager_js__WEBPACK_IMPORTED_MODULE_7__.loadNamingConvention() || "");
   function handleChange(resultObj, inputID) {
     console.log("resultObj,inputID", resultObj, inputID);
     setInputFieldsMap({
@@ -5361,7 +5366,7 @@ function App(props) {
   function onNamingChangeCallback(nameConvention) {
     setNamingConventionState(nameConvention);
     console.log("New naming convention", namingConventionState);
-    _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_6__.saveNamingConvention(nameConvention);
+    _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_7__.saveNamingConvention(nameConvention);
     generateFileName();
   }
   function sendValuesToForm(savedValues, update) {
@@ -5398,26 +5403,47 @@ function App(props) {
   function getValuesList() {
     return templateMap;
   }
+  function applyTemplates(activatedTemplateSet) {
+    let newTemplates = (0,_utils_templateParser_js__WEBPACK_IMPORTED_MODULE_8__.extractTemplatesFromTemplateSet)(activatedTemplateSet);
+    console.log("New templates from tSet", newTemplates);
+    sendValuesToForm(newTemplates, false);
+  }
+  function applyTextTemplates(activatedTemplateSet) {
+    let newTemplates = (0,_utils_templateParser_js__WEBPACK_IMPORTED_MODULE_8__.extractTextTemplatesFromTemplateSet)(activatedTemplateSet);
+    console.log("New text templates from tSet", newTemplates);
+    sendValuesToForm(newTemplates, true);
+  }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _style_css__WEBPACK_IMPORTED_MODULE_7__["default"].mainContainer
+    className: _style_css__WEBPACK_IMPORTED_MODULE_9__["default"].mainContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PresetsPane_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    loadTemplateSetList: _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_7__.loadTemplateSetList,
+    saveTemplateSetList: _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_7__.saveTemplateSetList,
+    applyTemplates: applyTemplates,
     nameConvention: namingConventionState,
     onNamingChange: onNamingChangeCallback,
     sendValuesToForm: sendValuesToForm,
     getValuesList: getValuesList
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _style_css__WEBPACK_IMPORTED_MODULE_7__["default"].templatesContainer
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u0428\u0430\u0431\u043B\u043E\u043D\u0438\u0437\u0430\u0442\u043E\u0440"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    className: _style_css__WEBPACK_IMPORTED_MODULE_9__["default"].templatesContainer
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u0428\u0430\u0431\u043B\u043E\u043D\u0438\u0437\u0430\u0442\u043E\u0440"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
     generateCallback: generateDocument,
     fileElementId: "doc" + new Date().getTime()
-  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
     generateCallback: generateDocument,
     fileElementId: "doc" + 1
   }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_InputList_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     addInputField: addInputField,
     xczdsalist: inputFieldList,
     onChangeCallback: handleChange
-  })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_TextPresetsPane_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    loadTemplateSetList: _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_7__.loadTextTemplateSetList,
+    applyTemplates: applyTextTemplates,
+    saveTemplateSetList: _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_7__.saveTextTemplateSetList,
+    nameConvention: namingConventionState,
+    onNamingChange: onNamingChangeCallback,
+    sendValuesToForm: sendValuesToForm,
+    getValuesList: getValuesList
+  }));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
@@ -5559,7 +5585,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function PresetsPane(props) {
   const [textToParse, setTextToParse] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
-  props.sendValuesToForm;
   function fromText(updateFlag) {
     console.warn(_utils_templateParser__WEBPACK_IMPORTED_MODULE_2__.extractTemplatesFromText, "extractTemplatesFromText");
     let resultValues = (0,_utils_templateParser__WEBPACK_IMPORTED_MODULE_2__.extractTemplatesFromText)(textToParse, updateFlag);
@@ -5596,6 +5621,9 @@ function PresetsPane(props) {
     className: _style_css__WEBPACK_IMPORTED_MODULE_4__["default"].textParseArea,
     onChange: updateText
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_TemplatesPresetList_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    loadTemplateSetList: props.loadTemplateSetList,
+    applyTemplates: props.applyTemplates,
+    saveTemplateSetList: props.saveTemplateSetList,
     getValuesList: props.getValuesList,
     sendValuesToForm: props.sendValuesToForm
   }));
@@ -5617,16 +5645,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _TemplatesSet_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TemplatesSet.jsx */ "./src/components/TemplatesSet.jsx");
-/* harmony import */ var _utils_templateParser_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/templateParser.js */ "./src/utils/templateParser.js");
-/* harmony import */ var _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/storageManager.js */ "./src/utils/storageManager.js");
-/* harmony import */ var _css_TemplatesPresetList_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./css/TemplatesPresetList.module.css */ "./src/components/css/TemplatesPresetList.module.css");
-
-
+/* harmony import */ var _css_TemplatesPresetList_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./css/TemplatesPresetList.module.css */ "./src/components/css/TemplatesPresetList.module.css");
 
 
 
 function TemplatesPresetList(props) {
-  const [setList, setSetList] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_utils_storageManager_js__WEBPACK_IMPORTED_MODULE_3__.loadTemplateSetList)() || []);
+  const [setList, setSetList] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.loadTemplateSetList() || []);
   const [currentTemplateSetName, setCurrentTemplateSetName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   function saveTemplatesToSet() {
     const templateMap = props.getValuesList();
@@ -5641,7 +5665,7 @@ function TemplatesPresetList(props) {
         name: currentTemplateSetName,
         templateList: templateMap
       }];
-      (0,_utils_storageManager_js__WEBPACK_IMPORTED_MODULE_3__.saveTemplateSetList)(newSetList);
+      props.saveTemplateSetList(newSetList);
       setSetList(newSetList);
     }
   }
@@ -5649,7 +5673,7 @@ function TemplatesPresetList(props) {
     const resultSetList = setList.filter(tSet => {
       return tSet.name != tName;
     });
-    (0,_utils_storageManager_js__WEBPACK_IMPORTED_MODULE_3__.saveTemplateSetList)(resultSetList);
+    props.saveTemplateSetList(resultSetList);
     setSetList(resultSetList);
   }
   function loadTemplateSet(templateSetName) {
@@ -5657,9 +5681,7 @@ function TemplatesPresetList(props) {
     let activatedTemplateSet = setList.find(el => el.name === templateSetName);
     // let newTemplates
     if (activatedTemplateSet) {
-      let newTemplates = (0,_utils_templateParser_js__WEBPACK_IMPORTED_MODULE_2__.extractTemplatesFromTemplateSet)(activatedTemplateSet);
-      console.log("New templates from tSet", newTemplates);
-      props.sendValuesToForm(newTemplates, false);
+      props.applyTemplates(activatedTemplateSet);
     }
 
     // console.log(setList.find((el)=>el.name === templateSetName));
@@ -5667,8 +5689,10 @@ function TemplatesPresetList(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: saveTemplatesToSet
-  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "\u0418\u043C\u044F \u043F\u0440\u0435\u0441\u0435\u0442\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: _css_TemplatesPresetList_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].inputTemplateSetName,
+  }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: _css_TemplatesPresetList_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].TemplateListTemplateNameLabel
+  }, "\u0418\u043C\u044F \u043F\u0440\u0435\u0441\u0435\u0442\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    className: _css_TemplatesPresetList_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].inputTemplateSetName,
     type: "text",
     onChange: e => {
       setCurrentTemplateSetName(e.target.value);
@@ -5721,6 +5745,38 @@ function TemplatesSet(props) {
     className: _css_templateSet_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].templateSetRemoveButton,
     onClick: removeTemplateSet
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "x")));
+}
+
+/***/ }),
+
+/***/ "./src/components/TextPresetsPane.jsx":
+/*!********************************************!*\
+  !*** ./src/components/TextPresetsPane.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TextPresetsPane)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
+/* harmony import */ var _TemplatesPresetList_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TemplatesPresetList.jsx */ "./src/components/TemplatesPresetList.jsx");
+
+
+
+function TextPresetsPane(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].presetsSideBarContainer
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_TemplatesPresetList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    applyTemplates: props.applyTemplates,
+    loadTemplateSetList: props.loadTemplateSetList,
+    saveTemplateSetList: props.saveTemplateSetList,
+    getValuesList: props.getValuesList,
+    sendValuesToForm: props.sendValuesToForm
+  }));
 }
 
 /***/ }),
@@ -5927,8 +5983,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   loadNamingConvention: () => (/* binding */ loadNamingConvention),
 /* harmony export */   loadTemplateSetList: () => (/* binding */ loadTemplateSetList),
+/* harmony export */   loadTextTemplateSetList: () => (/* binding */ loadTextTemplateSetList),
 /* harmony export */   saveNamingConvention: () => (/* binding */ saveNamingConvention),
-/* harmony export */   saveTemplateSetList: () => (/* binding */ saveTemplateSetList)
+/* harmony export */   saveTemplateSetList: () => (/* binding */ saveTemplateSetList),
+/* harmony export */   saveTextTemplateSetList: () => (/* binding */ saveTextTemplateSetList)
 /* harmony export */ });
 function saveNamingConvention(namingConvention) {
   localStorage.setItem("naming_convention", namingConvention);
@@ -5947,6 +6005,17 @@ function saveTemplateSetList(templateSetList) {
   console.log(item, templateSetList, "item", "templateSetList");
   return localStorage.setItem("templateSetList", item);
 }
+function loadTextTemplateSetList() {
+  const item = localStorage.getItem("textTemplateSetList");
+  const result = JSON.parse(item);
+  console.log(item, result, "item", "result");
+  return result;
+}
+function saveTextTemplateSetList(templateSetList) {
+  const item = JSON.stringify(templateSetList);
+  console.log(item, templateSetList, "item", "textTemplateSetList");
+  return localStorage.setItem("textTemplateSetList", item);
+}
 
 /***/ }),
 
@@ -5960,7 +6029,8 @@ function saveTemplateSetList(templateSetList) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   extractTemplatesFromTemplateSet: () => (/* binding */ extractTemplatesFromTemplateSet),
-/* harmony export */   extractTemplatesFromText: () => (/* binding */ extractTemplatesFromText)
+/* harmony export */   extractTemplatesFromText: () => (/* binding */ extractTemplatesFromText),
+/* harmony export */   extractTextTemplatesFromTemplateSet: () => (/* binding */ extractTextTemplatesFromTemplateSet)
 /* harmony export */ });
 function extractTemplatesFromText(text, updateFlag) {
   let result;
@@ -5993,6 +6063,19 @@ function extractTemplatesFromTemplateSet(templateSet) {
     };
     returnObject.value = key;
     returnObject.textValue = "";
+    return returnObject;
+  });
+  return returnValues;
+}
+function extractTextTemplatesFromTemplateSet(templateSet) {
+  const templates = templateSet.templateList;
+  let returnValues = Object.entries(templates).map((el, i) => {
+    const [key, value] = el;
+    const returnObject = {
+      id: Date.now() + i
+    };
+    returnObject.value = key;
+    returnObject.textValue = value;
     return returnObject;
   });
   return returnValues;
@@ -6074,10 +6157,15 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.I6gVX27YCZs4UOmlbwkw{
     width: 100%;
-}`, "",{"version":3,"sources":["webpack://./src/components/css/TemplatesPresetList.module.css"],"names":[],"mappings":"AAAA;IACI,WAAW;AACf","sourcesContent":[".inputTemplateSetName{\r\n    width: 100%;\r\n}"],"sourceRoot":""}]);
+}
+
+.rQMRevIW_6mwX9X47q2w{
+    display: block;
+}`, "",{"version":3,"sources":["webpack://./src/components/css/TemplatesPresetList.module.css"],"names":[],"mappings":"AAAA;IACI,WAAW;AACf;;AAEA;IACI,cAAc;AAClB","sourcesContent":[".inputTemplateSetName{\r\n    width: 100%;\r\n}\r\n\r\n.TemplateListTemplateNameLabel{\r\n    display: block;\r\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
-	"inputTemplateSetName": `I6gVX27YCZs4UOmlbwkw`
+	"inputTemplateSetName": `I6gVX27YCZs4UOmlbwkw`,
+	"TemplateListTemplateNameLabel": `rQMRevIW_6mwX9X47q2w`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6301,7 +6389,7 @@ div button {
 
 .ItourmMtefo1XjDifJzz {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 3fr 1fr;
     background-color: var(--main-bg-color);
     grid-column-gap: 20px;
     color: var(--main-figure-color);
@@ -6364,7 +6452,7 @@ div button {
     /* font-size: 20px; */
     margin-top: 10px;
     width: 100%;
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,sBAAsB;AAC1B;;AAEA;IACI,wBAAwB;IACxB,6BAA6B;IAC7B,wBAAwB;;IAExB,yBAAyB;AAC7B;;AAEA;IACI,SAAS;IACT,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,sCAAsC;IACtC,qBAAqB;IACrB,+BAA+B;IAC/B,cAAc;IACd,eAAe;IACf,iBAAiB;IACjB,gBAAgB;IAChB,kBAAkB;IAClB,mBAAmB;IACnB,qBAAqB;IACrB,kBAAkB;AACtB;;AAEA;IACI,sCAAsC;IACtC,yBAAyB;IACzB,oBAAoB;AACxB;;AAEA;IACI,sCAAsC;IACtC,aAAa;IACb,sBAAsB;IACtB,2BAA2B;IAC3B,yBAAyB;IACzB,gBAAgB;AACpB;;;;;AAKA;;;GAGG;;AAEH;IACI,YAAY;AAChB;;;;AAIA;IACI,aAAa;IACb,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,qBAAqB;IACrB,gBAAgB;IAChB,WAAW;AACf","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\n*{\r\n    box-sizing: border-box;\r\n}\r\n\r\n:root {\r\n    --main-fg-color: #fbfbfb;\r\n    /* --main-fg-color:#f2f2f2; */\r\n    --main-bg-color: #f2f2f2;\r\n\r\n    --main-figure-color: #333;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: var(--main-bg-color);\r\n}\r\n\r\ndiv button {\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 3fr;\r\n    background-color: var(--main-bg-color);\r\n    grid-column-gap: 20px;\r\n    color: var(--main-figure-color);\r\n    margin: 0 auto;\r\n    margin-top:20px;\r\n    min-height: 100vh;\r\n    min-width: 768px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    padding-bottom: 120px;\r\n    text-align: center;\r\n}\r\n\r\n.templatesContainer {\r\n    background-color: var(--main-fg-color);\r\n    border: solid 1px #6c6349;\r\n    padding-bottom: 40px;\r\n}\r\n\r\n.presetsSideBarContainer {\r\n    background-color: var(--main-fg-color);\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n    border: solid 1px #6c6349;\r\n    max-width: 300px;\r\n}\r\n\r\n\r\n\r\n\r\n/* .fileInputContainer {\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n} */\r\n\r\ndiv button {\r\n    margin: 10px;\r\n}\r\n\r\n\r\n\r\n.presetsButtonsContainer {\r\n    padding: 10px;\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.textParseArea {\r\n    resize: vertical;\r\n    width: 300px;\r\n}\r\n\r\n.textParseAreaContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.NamingFileStyle {\r\n    /* font-size: 20px; */\r\n    margin-top: 10px;\r\n    width: 100%;\r\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,sBAAsB;AAC1B;;AAEA;IACI,wBAAwB;IACxB,6BAA6B;IAC7B,wBAAwB;;IAExB,yBAAyB;AAC7B;;AAEA;IACI,SAAS;IACT,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,aAAa;IACb,kCAAkC;IAClC,sCAAsC;IACtC,qBAAqB;IACrB,+BAA+B;IAC/B,cAAc;IACd,eAAe;IACf,iBAAiB;IACjB,gBAAgB;IAChB,kBAAkB;IAClB,mBAAmB;IACnB,qBAAqB;IACrB,kBAAkB;AACtB;;AAEA;IACI,sCAAsC;IACtC,yBAAyB;IACzB,oBAAoB;AACxB;;AAEA;IACI,sCAAsC;IACtC,aAAa;IACb,sBAAsB;IACtB,2BAA2B;IAC3B,yBAAyB;IACzB,gBAAgB;AACpB;;;;;AAKA;;;GAGG;;AAEH;IACI,YAAY;AAChB;;;;AAIA;IACI,aAAa;IACb,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,qBAAqB;IACrB,gBAAgB;IAChB,WAAW;AACf","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\n*{\r\n    box-sizing: border-box;\r\n}\r\n\r\n:root {\r\n    --main-fg-color: #fbfbfb;\r\n    /* --main-fg-color:#f2f2f2; */\r\n    --main-bg-color: #f2f2f2;\r\n\r\n    --main-figure-color: #333;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: var(--main-bg-color);\r\n}\r\n\r\ndiv button {\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 3fr 1fr;\r\n    background-color: var(--main-bg-color);\r\n    grid-column-gap: 20px;\r\n    color: var(--main-figure-color);\r\n    margin: 0 auto;\r\n    margin-top:20px;\r\n    min-height: 100vh;\r\n    min-width: 768px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    padding-bottom: 120px;\r\n    text-align: center;\r\n}\r\n\r\n.templatesContainer {\r\n    background-color: var(--main-fg-color);\r\n    border: solid 1px #6c6349;\r\n    padding-bottom: 40px;\r\n}\r\n\r\n.presetsSideBarContainer {\r\n    background-color: var(--main-fg-color);\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n    border: solid 1px #6c6349;\r\n    max-width: 300px;\r\n}\r\n\r\n\r\n\r\n\r\n/* .fileInputContainer {\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n} */\r\n\r\ndiv button {\r\n    margin: 10px;\r\n}\r\n\r\n\r\n\r\n.presetsButtonsContainer {\r\n    padding: 10px;\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.textParseArea {\r\n    resize: vertical;\r\n    width: 300px;\r\n}\r\n\r\n.textParseAreaContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.NamingFileStyle {\r\n    /* font-size: 20px; */\r\n    margin-top: 10px;\r\n    width: 100%;\r\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"mainContainer": `ItourmMtefo1XjDifJzz`,
