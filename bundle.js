@@ -5280,7 +5280,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/storageManager.js */ "./src/utils/storageManager.js");
 /* harmony import */ var _utils_templateParser_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/templateParser.js */ "./src/utils/templateParser.js");
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
-/* harmony import */ var _components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/generatePane.jsx */ "./src/components/generatePane.jsx");
+/* harmony import */ var _components_generateLayout_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/generateLayout.jsx */ "./src/components/generateLayout.jsx");
 
 
 
@@ -5292,13 +5292,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function App(props) {
-  const inputFieldObjectExample = {
-    id: Date.now(),
-    value: "",
-    textValue: ""
-  };
+  //const inputFieldObjectExample ={ id: Date.now(), value: "", textValue: "" };
   const [inputFieldList, setInputFieldList] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [namingConventionState, setNamingConventionState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_utils_storageManager_js__WEBPACK_IMPORTED_MODULE_5__.loadNamingConvention() || "");
+  const [namingConventionState, setNamingConventionState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
   function handleChange(resultObj, inputID) {
     console.log("resultObj,inputID", resultObj, inputID);
     const inputFieldElt = inputFieldList.find(el => el.id === inputID);
@@ -5316,10 +5312,7 @@ function App(props) {
     });
     console.log(newList);
     setInputFieldList(newList);
-
-    // console.log(inputFieldList,"inputFieldList");
   }
-
   function generateTemplatesMap() {
     const transformedObject = {};
     inputFieldList.forEach(el => {
@@ -5328,8 +5321,13 @@ function App(props) {
     console.log("Transformed keys", transformedObject, "inputFieldList", inputFieldList);
     return transformedObject;
   }
-  function generateDocument(file) {
-    (0,_utils_docx_generator_js__WEBPACK_IMPORTED_MODULE_1__["default"])(file, generateTemplatesMap(), generateFileName());
+  function generateDocument(file, index) {
+    if (file) {
+      console.log("Name of file", generateFileName(index), generateTemplatesMap());
+      (0,_utils_docx_generator_js__WEBPACK_IMPORTED_MODULE_1__["default"])(file, generateTemplatesMap(), generateFileName(index));
+    } else {
+      console.log("generating file with", generateTemplatesMap(), generateFileName(index));
+    }
   }
   function addInputField(text) {
     setInputFieldList([...inputFieldList, {
@@ -5338,25 +5336,37 @@ function App(props) {
       textValue: ""
     }]);
   }
-  function generateFileName() {
-    let nameTemplates = namingConventionState.match(/{[А-ЯЁ_A-Z]*}/g);
+  function generateFileName(index) {
+    const namingString = namingConventionState[index] || "";
+    console.log("namingString", namingString, index, namingConventionState);
+    let nameTemplates = namingString.match(/{[А-ЯЁ_A-Z]*}/g);
     const templateMap = generateTemplatesMap();
     if (nameTemplates) {
       let names = nameTemplates.map(t => t.replace(/[{}]/g, ""));
-      let values = names.map(n => {
-        return templateMap[n];
+      let resultName = namingString.replace(/[{}]/g, "");
+      names.forEach(n => {
+        resultName = resultName.replace(n, templateMap[n]);
       });
-      console.log("Naming names", values);
-      if (values) {
-        return values.join(" ");
-      }
+      return resultName;
+      // let values = names.map((n) => { return templateMap[n] });
+      // console.log("Naming names", values);
+      // if (values) {
+      //     return values.join(" ");
+      // }
     }
   }
-  function onNamingChangeCallback(nameConvention) {
-    setNamingConventionState(nameConvention);
-    console.log("New naming convention", namingConventionState);
-    _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_5__.saveNamingConvention(nameConvention);
-    generateFileName();
+
+  function onNamingChangeCallback(nameConventionString, index) {
+    console.log("nameConventionString", nameConventionString, index);
+    const newNamingState = {
+      ...namingConventionState
+    };
+    newNamingState[index] = nameConventionString;
+    setNamingConventionState({
+      ...newNamingState
+    });
+    console.log("New naming convention", newNamingState, generateFileName(index));
+    _utils_storageManager_js__WEBPACK_IMPORTED_MODULE_5__.saveNamingConvention(newNamingState);
   }
   function sendValuesToForm(savedValues, update) {
     console.log("sendValuesToForm", savedValues, update);
@@ -5398,6 +5408,9 @@ function App(props) {
     console.log("New text templates from tSet", newTemplates);
     sendValuesToForm(newTemplates, true);
   }
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setNamingConventionState(_utils_storageManager_js__WEBPACK_IMPORTED_MODULE_5__.loadNamingConvention() || "");
+  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _style_css__WEBPACK_IMPORTED_MODULE_7__["default"].mainContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PresetsPane_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -5410,13 +5423,9 @@ function App(props) {
     getValuesList: getValuesList
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _style_css__WEBPACK_IMPORTED_MODULE_7__["default"].templatesContainer
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u0428\u0430\u0431\u043B\u043E\u043D\u0438\u0437\u0430\u0442\u043E\u0440"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    generateCallback: generateDocument,
-    fileElementId: "doc" + new Date().getTime()
-  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    generateCallback: generateDocument,
-    fileElementId: "doc" + 1
-  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_InputList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "\u0428\u0430\u0431\u043B\u043E\u043D\u0438\u0437\u0430\u0442\u043E\u0440"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generateLayout_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    generateCallback: generateDocument
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_InputList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     addInputField: addInputField,
     inputList: inputFieldList,
     onChangeCallback: handleChange
@@ -5552,6 +5561,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_templateParser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/templateParser */ "./src/utils/templateParser.js");
 /* harmony import */ var _TemplatesPresetList_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TemplatesPresetList.jsx */ "./src/components/TemplatesPresetList.jsx");
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
+/* harmony import */ var _namingPane_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./namingPane.jsx */ "./src/components/namingPane.jsx");
+
 
 
 
@@ -5572,18 +5583,10 @@ function PresetsPane(props) {
     className: _style_css__WEBPACK_IMPORTED_MODULE_4__["default"].presetsSideBarContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _style_css__WEBPACK_IMPORTED_MODULE_4__["default"].presetsButtonsContainer
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    htmlFor: "NamingFileStyle"
-  }, "\u041D\u0430\u0438\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    type: "text",
-    className: _style_css__WEBPACK_IMPORTED_MODULE_4__["default"].NamingFileStyle,
-    name: "NamingFileStyle",
-    onChange: e => {
-      props.onNamingChange(e.target.value);
-    },
-    id: "NamingFileStyle",
-    value: props.nameConvention
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_namingPane_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onNamingChange: props.onNamingChange,
+    nameConvention: props.nameConvention
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: () => {
       fromText(true);
     }
@@ -5774,12 +5777,45 @@ function GenerateButton(props) {
       let file = docs.files.item(0);
       if (!file) {
         console.error("No files in input");
+        props.generateCallback(file, props.fileIndex);
       } else {
         console.log(file, "File before passing");
-        props.generateCallback(file);
+        props.generateCallback(file, props.fileIndex);
       }
     }
   }, props.children);
+}
+
+/***/ }),
+
+/***/ "./src/components/generateLayout.jsx":
+/*!*******************************************!*\
+  !*** ./src/components/generateLayout.jsx ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GenerateLayout)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/generatePane.jsx */ "./src/components/generatePane.jsx");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
+
+
+
+function GenerateLayout(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    generateCallback: props.generateCallback,
+    fileElementId: "doc" + 0,
+    fileIndex: 1
+  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generatePane_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    generateCallback: props.generateCallback,
+    fileElementId: "doc" + 1,
+    fileIndex: 2
+  }, "\u0413\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F"));
 }
 
 /***/ }),
@@ -5814,8 +5850,54 @@ function GeneratePane(props) {
     accept: ".docx"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_generateButton_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
     generateCallback: props.generateCallback,
-    docID: props.fileElementId
+    docID: props.fileElementId,
+    fileIndex: props.fileIndex
   }, props.children)));
+}
+
+/***/ }),
+
+/***/ "./src/components/namingPane.jsx":
+/*!***************************************!*\
+  !*** ./src/components/namingPane.jsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ NamingPane)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
+
+
+function NamingPane(props) {
+  // console.log("Naming Pane",props.nameConvention);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "NamingFileStyle"
+  }, "\u041D\u0430\u0438\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].NamingFileStyle,
+    name: "NamingFileStyle",
+    onChange: e => {
+      props.onNamingChange(e.target.value, 1);
+    },
+    id: "NamingFileStyle",
+    value: props.nameConvention[1] || ""
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "NamingFileStyle"
+  }, "\u041D\u0430\u0438\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    className: _style_css__WEBPACK_IMPORTED_MODULE_1__["default"].NamingFileStyle,
+    name: "NamingFileStyle2",
+    onChange: e => {
+      props.onNamingChange(e.target.value, 2);
+    },
+    id: "NamingFileStyle2",
+    value: props.nameConvention[2] || ""
+  })));
 }
 
 /***/ }),
@@ -5958,33 +6040,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   saveTemplateSetList: () => (/* binding */ saveTemplateSetList),
 /* harmony export */   saveTextTemplateSetList: () => (/* binding */ saveTextTemplateSetList)
 /* harmony export */ });
+function load(name) {
+  const item = localStorage.getItem(name);
+  const result = JSON.parse(item);
+  // console.log(item,result,"item","result");
+  return result;
+}
+function save(name, object) {
+  const item = JSON.stringify(object);
+  // console.log(item,templateSetList,"item","templateSetList");        
+  localStorage.setItem(name, item);
+}
 function saveNamingConvention(namingConvention) {
-  localStorage.setItem("naming_convention", namingConvention);
+  console.log("naming_convention", namingConvention);
+  save("naming_convention", namingConvention);
 }
 function loadNamingConvention() {
-  return localStorage.getItem("naming_convention");
+  return load("naming_convention");
 }
 function loadTemplateSetList() {
-  const item = localStorage.getItem("templateSetList");
-  const result = JSON.parse(item);
-  // console.log(item,result,"item","result");
-  return result;
+  return load("templateSetList");
 }
 function saveTemplateSetList(templateSetList) {
-  const item = JSON.stringify(templateSetList);
-  // console.log(item,templateSetList,"item","templateSetList");        
-  return localStorage.setItem("templateSetList", item);
+  save("templateSetList", templateSetList);
 }
 function loadTextTemplateSetList() {
-  const item = localStorage.getItem("textTemplateSetList");
-  const result = JSON.parse(item);
-  // console.log(item,result,"item","result");
-  return result;
+  return load("textTemplateSetList");
 }
 function saveTextTemplateSetList(templateSetList) {
-  const item = JSON.stringify(templateSetList);
-  // console.log(item,templateSetList,"item","textTemplateSetList");        
-  return localStorage.setItem("textTemplateSetList", item);
+  save("textTemplateSetList", templateSetList);
 }
 
 /***/ }),
