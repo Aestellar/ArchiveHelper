@@ -5260,6 +5260,30 @@ exports.ParseError = ParseError;
 
 /***/ }),
 
+/***/ "./src/AppContainer.jsx":
+/*!******************************!*\
+  !*** ./src/AppContainer.jsx ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AppContainer)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _TemplatesModule_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TemplatesModule.jsx */ "./src/TemplatesModule.jsx");
+
+// import { Tab,Tabs, TabList,TabPanel } from "react-tabs";
+
+function AppContainer() {
+  const result = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_TemplatesModule_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, result);
+}
+
+/***/ }),
+
 /***/ "./src/TemplatesModule.jsx":
 /*!*********************************!*\
   !*** ./src/TemplatesModule.jsx ***!
@@ -6310,10 +6334,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_1_use_1_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!../../style.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/style.css");
 // Imports
 
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_1_use_1_style_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.vBtstoDiNENBfKxVE65A{
 /* border: 1px solid skyblue; */
@@ -6326,25 +6353,25 @@ display: initial;
 
 .v53Vm8C7b7EJowQ37Fnq{
     width: 100%;
-    background-color: rgb(248 250 251);
+    background-color: var(--button-default-color);
     font-size: 20px;
     border: 1px solid #d3d3d3;    
 }
 
 .v53Vm8C7b7EJowQ37Fnq:hover{
     /* width: 100%; */
-    background-color: rgb(240, 255, 247);
+    background-color: var(--button-hover-color);
 }
 
 .v53Vm8C7b7EJowQ37Fnq:active{
     /* width: 100%; */
-    background-color: rgb(255, 255, 240);
+    background-color: var(--button-active-color);
 }
 
 .mQ3mZNSkNKvmnJmgYqQc{
     border-bottom: 1px solid #d3d3d3;
     margin-bottom: 10px;
-}`, "",{"version":3,"sources":["webpack://./src/components/css/generatePane.module.css"],"names":[],"mappings":"AAAA;AACA,+BAA+B;AAC/B,gBAAgB;AAChB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,WAAW;IACX,kCAAkC;IAClC,eAAe;IACf,yBAAyB;AAC7B;;AAEA;IACI,iBAAiB;IACjB,oCAAoC;AACxC;;AAEA;IACI,iBAAiB;IACjB,oCAAoC;AACxC;;AAEA;IACI,gCAAgC;IAChC,mBAAmB;AACvB","sourcesContent":[".selectFilePane{\r\n/* border: 1px solid skyblue; */\r\ndisplay: initial;\r\n}\r\n\r\n.selectFilePane input{\r\n    display: none;\r\n}\r\n\r\n.selectedFileName{\r\n    width: 100%;\r\n    background-color: rgb(248 250 251);\r\n    font-size: 20px;\r\n    border: 1px solid #d3d3d3;    \r\n}\r\n\r\n.selectedFileName:hover{\r\n    /* width: 100%; */\r\n    background-color: rgb(240, 255, 247);\r\n}\r\n\r\n.selectedFileName:active{\r\n    /* width: 100%; */\r\n    background-color: rgb(255, 255, 240);\r\n}\r\n\r\n.generatePaneContainer{\r\n    border-bottom: 1px solid #d3d3d3;\r\n    margin-bottom: 10px;\r\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/css/generatePane.module.css"],"names":[],"mappings":"AAEA;AACA,+BAA+B;AAC/B,gBAAgB;AAChB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,WAAW;IACX,6CAA6C;IAC7C,eAAe;IACf,yBAAyB;AAC7B;;AAEA;IACI,iBAAiB;IACjB,2CAA2C;AAC/C;;AAEA;IACI,iBAAiB;IACjB,4CAA4C;AAChD;;AAEA;IACI,gCAAgC;IAChC,mBAAmB;AACvB","sourcesContent":["@import \"../../style.css\";\r\n\r\n.selectFilePane{\r\n/* border: 1px solid skyblue; */\r\ndisplay: initial;\r\n}\r\n\r\n.selectFilePane input{\r\n    display: none;\r\n}\r\n\r\n.selectedFileName{\r\n    width: 100%;\r\n    background-color: var(--button-default-color);\r\n    font-size: 20px;\r\n    border: 1px solid #d3d3d3;    \r\n}\r\n\r\n.selectedFileName:hover{\r\n    /* width: 100%; */\r\n    background-color: var(--button-hover-color);\r\n}\r\n\r\n.selectedFileName:active{\r\n    /* width: 100%; */\r\n    background-color: var(--button-active-color);\r\n}\r\n\r\n.generatePaneContainer{\r\n    border-bottom: 1px solid #d3d3d3;\r\n    margin-bottom: 10px;\r\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"selectFilePane": `vBtstoDiNENBfKxVE65A`,
@@ -6393,6 +6420,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Key078Gyra_mLgj86v52 {
     width: 100%;
     resize: vertical;
     min-height: 1.6em;
+    overflow-x:hidden;
 }
 
 .Key078Gyra_mLgj86v52 label{
@@ -6401,7 +6429,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Key078Gyra_mLgj86v52 {
 
 /* .inputContainer{
   
-} */`, "",{"version":3,"sources":["webpack://./src/components/css/inputField.module.css"],"names":[],"mappings":"AAAA;IACI,uBAAuB;IACvB,aAAa;IACb,8BAA8B;IAC9B,eAAe;AACnB;;AAEA;IACI,8BAA8B;IAC9B,WAAW;AACf;;AAEA;IACI,8BAA8B;IAC9B,WAAW;IACX,gBAAgB;IAChB,iBAAiB;AACrB;;AAEA;IACI,YAAY;AAChB;;AAEA;;GAEG","sourcesContent":[".inputFieldCSS {\r\n    margin: 1px 10px 0 10px;\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n    font-size: 30px;\r\n}\r\n\r\n.inputFieldCSS input {\r\n    /* margin: 10px 10px 0 10px; */\r\n    width: 100%;\r\n}\r\n\r\n.inputFieldCSS textarea {\r\n    /* margin: 10px 10px 0 10px; */\r\n    width: 100%;\r\n    resize: vertical;\r\n    min-height: 1.6em;\r\n}\r\n\r\n.inputFieldCSS label{\r\n    margin: 10px;\r\n}\r\n\r\n/* .inputContainer{\r\n  \r\n} */"],"sourceRoot":""}]);
+} */`, "",{"version":3,"sources":["webpack://./src/components/css/inputField.module.css"],"names":[],"mappings":"AAAA;IACI,uBAAuB;IACvB,aAAa;IACb,8BAA8B;IAC9B,eAAe;AACnB;;AAEA;IACI,8BAA8B;IAC9B,WAAW;AACf;;AAEA;IACI,8BAA8B;IAC9B,WAAW;IACX,gBAAgB;IAChB,iBAAiB;IACjB,iBAAiB;AACrB;;AAEA;IACI,YAAY;AAChB;;AAEA;;GAEG","sourcesContent":[".inputFieldCSS {\r\n    margin: 1px 10px 0 10px;\r\n    display: grid;\r\n    grid-template-columns: 1fr 1fr;\r\n    font-size: 30px;\r\n}\r\n\r\n.inputFieldCSS input {\r\n    /* margin: 10px 10px 0 10px; */\r\n    width: 100%;\r\n}\r\n\r\n.inputFieldCSS textarea {\r\n    /* margin: 10px 10px 0 10px; */\r\n    width: 100%;\r\n    resize: vertical;\r\n    min-height: 1.6em;\r\n    overflow-x:hidden;\r\n}\r\n\r\n.inputFieldCSS label{\r\n    margin: 10px;\r\n}\r\n\r\n/* .inputContainer{\r\n  \r\n} */"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"inputFieldCSS": `Key078Gyra_mLgj86v52`
@@ -6502,14 +6530,15 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Lj9AAXUwKboihJ0bCKhf{
     margin: 2px;
     margin-top: 3px;
     user-select: none;
+    background-color: var(--button-default-color);
 }
 
 .Lj9AAXUwKboihJ0bCKhf:hover{
-    background-color: rgb(240, 255, 247);
+    background-color: var(--button-hover-color);
 }
 
 .Lj9AAXUwKboihJ0bCKhf:active{
-    background-color: rgb(255, 255, 240);
+    background-color: var(--button-active-color);
 }
 
 ._GA0vBKY5y61sDOQj9ae{
@@ -6535,12 +6564,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Lj9AAXUwKboihJ0bCKhf{
 }
 
 .fngqfBKVIo8iiDpmBt6w:hover{
-    background-color: rgb(253, 199, 199);
+    background-color: var(--delete-button-hover-color);
 }
 
 .fngqfBKVIo8iiDpmBt6w:active{
-    background-color: rgb(240, 90, 90);
-}`, "",{"version":3,"sources":["webpack://./src/components/css/templateSet.module.css"],"names":[],"mappings":"AAIA;IACI,yBAAyB;IACzB,WAAW;IACX,eAAe;IACf,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,WAAW;IACX,eAAe;IACf,iBAAiB;AACrB;;AAEA;IACI,oCAAoC;AACxC;;AAEA;IACI,oCAAoC;AACxC;;AAEA;IACI,gBAAgB;IAChB,cAAc;IACd,UAAU;IACV,iBAAiB;IACjB,2BAA2B;AAC/B;;AAEA;IACI,WAAW;;AAEf;;AAEA;IACI,yBAAyB;IACzB,kBAAkB;IAClB,uBAAuB;IACvB,UAAU;IACV,WAAW;IACX,iBAAiB;AACrB;;AAEA;IACI,oCAAoC;AACxC;;AAEA;IACI,kCAAkC;AACtC","sourcesContent":["@import \"./../../style.css\";\r\n\r\n\r\n\r\n.templateSetEntry{\r\n    border: 2px solid #d3d3d3;\r\n    width: 100%;\r\n    max-width: 100%;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin: 2px;\r\n    margin-top: 3px;\r\n    user-select: none;\r\n}\r\n\r\n.templateSetEntry:hover{\r\n    background-color: rgb(240, 255, 247);\r\n}\r\n\r\n.templateSetEntry:active{\r\n    background-color: rgb(255, 255, 240);\r\n}\r\n\r\n.templateSetEntryNameParent{\r\n    overflow: hidden;\r\n    max-width: 90%;\r\n    width: 90%;\r\n    min-height: 1.4em;\r\n    /* background-color: red; */\r\n}\r\n\r\n.templateSetEntryName{\r\n    width: 100%;\r\n\r\n}\r\n\r\n.templateSetRemoveButton{\r\n    border: 1px solid #d3d3d3;    \r\n    /* padding: 2px; */\r\n    /* margin-right: 5px; */\r\n    width: 10%;\r\n    margin: 1px;\r\n    margin-right: 3px;\r\n}\r\n\r\n.templateSetRemoveButton:hover{\r\n    background-color: rgb(253, 199, 199);\r\n}\r\n\r\n.templateSetRemoveButton:active{\r\n    background-color: rgb(240, 90, 90);\r\n}"],"sourceRoot":""}]);
+    background-color: var(--delete-button-active-color);
+}`, "",{"version":3,"sources":["webpack://./src/components/css/templateSet.module.css"],"names":[],"mappings":"AAGA;IACI,yBAAyB;IACzB,WAAW;IACX,eAAe;IACf,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,WAAW;IACX,eAAe;IACf,iBAAiB;IACjB,6CAA6C;AACjD;;AAEA;IACI,2CAA2C;AAC/C;;AAEA;IACI,4CAA4C;AAChD;;AAEA;IACI,gBAAgB;IAChB,cAAc;IACd,UAAU;IACV,iBAAiB;IACjB,2BAA2B;AAC/B;;AAEA;IACI,WAAW;;AAEf;;AAEA;IACI,yBAAyB;IACzB,kBAAkB;IAClB,uBAAuB;IACvB,UAAU;IACV,WAAW;IACX,iBAAiB;AACrB;;AAEA;IACI,kDAAkD;AACtD;;AAEA;IACI,mDAAmD;AACvD","sourcesContent":["@import \"./../../style.css\";\r\n\r\n\r\n.templateSetEntry{\r\n    border: 2px solid #d3d3d3;\r\n    width: 100%;\r\n    max-width: 100%;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin: 2px;\r\n    margin-top: 3px;\r\n    user-select: none;\r\n    background-color: var(--button-default-color);\r\n}\r\n\r\n.templateSetEntry:hover{\r\n    background-color: var(--button-hover-color);\r\n}\r\n\r\n.templateSetEntry:active{\r\n    background-color: var(--button-active-color);\r\n}\r\n\r\n.templateSetEntryNameParent{\r\n    overflow: hidden;\r\n    max-width: 90%;\r\n    width: 90%;\r\n    min-height: 1.4em;\r\n    /* background-color: red; */\r\n}\r\n\r\n.templateSetEntryName{\r\n    width: 100%;\r\n\r\n}\r\n\r\n.templateSetRemoveButton{\r\n    border: 1px solid #d3d3d3;    \r\n    /* padding: 2px; */\r\n    /* margin-right: 5px; */\r\n    width: 10%;\r\n    margin: 1px;\r\n    margin-right: 3px;\r\n}\r\n\r\n.templateSetRemoveButton:hover{\r\n    background-color: var(--delete-button-hover-color);\r\n}\r\n\r\n.templateSetRemoveButton:active{\r\n    background-color: var(--delete-button-active-color);\r\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"templateSetEntry": `Lj9AAXUwKboihJ0bCKhf`,
@@ -6585,9 +6614,15 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* div {
     --main-fg-color: #fbfbfb;
     /* --main-fg-color:#f2f2f2; */
     --main-bg-color: #f2f2f2;
-
     --main-figure-color: #333;
+    --button-default-color:rgb(248 250 251);
+    --button-hover-color:rgb(240, 255, 247);
+    --button-active-color:rgb(255, 255, 240);
+    --delete-button-hover-color:rgb(253, 199, 199);
+    --delete-button-active-color:rgb(240, 90, 90);
 }
+
+
 
 body {
     margin: 0;
@@ -6674,7 +6709,7 @@ div button:active {
     /* font-size: 20px; */
     margin-top: 10px;
     width: 100%;
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,sBAAsB;AAC1B;;AAEA;IACI,wBAAwB;IACxB,6BAA6B;IAC7B,wBAAwB;;IAExB,yBAAyB;AAC7B;;AAEA;IACI,SAAS;IACT,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,aAAa;IACb,kCAAkC;IAClC,sCAAsC;IACtC,qBAAqB;IACrB,+BAA+B;IAC/B,cAAc;IACd,eAAe;IACf,iBAAiB;IACjB,gBAAgB;IAChB,kBAAkB;IAClB,mBAAmB;IACnB,qBAAqB;IACrB,kBAAkB;AACtB;;AAEA;IACI,sCAAsC;IACtC,yBAAyB;IACzB,oBAAoB;AACxB;;AAEA;IACI,sCAAsC;IACtC,aAAa;IACb,sBAAsB;IACtB,2BAA2B;IAC3B,yBAAyB;IACzB,gBAAgB;AACpB;;;;;AAKA;;;GAGG;;AAEH;IACI,gBAAgB;IAChB,mBAAmB;IACnB,UAAU;IACV,kCAAkC;IAClC,yBAAyB;AAC7B;;AAEA;IACI,kCAAkC;AACtC;;AAEA;IACI,oCAAoC;AACxC;;AAEA;IACI,aAAa;IACb,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,qBAAqB;IACrB,gBAAgB;IAChB,WAAW;AACf","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\n*{\r\n    box-sizing: border-box;\r\n}\r\n\r\n:root {\r\n    --main-fg-color: #fbfbfb;\r\n    /* --main-fg-color:#f2f2f2; */\r\n    --main-bg-color: #f2f2f2;\r\n\r\n    --main-figure-color: #333;\r\n}\r\n\r\nbody {\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: var(--main-bg-color);\r\n}\r\n\r\ndiv button {\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 3fr 1fr;\r\n    background-color: var(--main-bg-color);\r\n    grid-column-gap: 20px;\r\n    color: var(--main-figure-color);\r\n    margin: 0 auto;\r\n    margin-top:20px;\r\n    min-height: 100vh;\r\n    min-width: 768px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    padding-bottom: 120px;\r\n    text-align: center;\r\n}\r\n\r\n.templatesContainer {\r\n    background-color: var(--main-fg-color);\r\n    border: solid 1px #6c6349;\r\n    padding-bottom: 40px;\r\n}\r\n\r\n.presetsSideBarContainer {\r\n    background-color: var(--main-fg-color);\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n    border: solid 1px #6c6349;\r\n    max-width: 300px;\r\n}\r\n\r\n\r\n\r\n\r\n/* .fileInputContainer {\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n} */\r\n\r\ndiv button {\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n    width:100%;\r\n    background-color: rgb(251 252 255);\r\n    border: 1px solid #d3d3d3;\r\n}\r\n\r\ndiv button:hover {\r\n    background-color: rgb(240 255 240);\r\n}\r\n\r\ndiv button:active {\r\n    background-color: rgb(249, 250, 196);\r\n}\r\n\r\n.presetsButtonsContainer {\r\n    padding: 10px;\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.textParseArea {\r\n    resize: vertical;\r\n    width: 300px;\r\n}\r\n\r\n.textParseAreaContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.NamingFileStyle {\r\n    /* font-size: 20px; */\r\n    margin-top: 10px;\r\n    width: 100%;\r\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;GAEG;;AAEH;IACI,sBAAsB;AAC1B;;AAEA;IACI,wBAAwB;IACxB,6BAA6B;IAC7B,wBAAwB;IACxB,yBAAyB;IACzB,uCAAuC;IACvC,uCAAuC;IACvC,wCAAwC;IACxC,8CAA8C;IAC9C,6CAA6C;AACjD;;;;AAIA;IACI,SAAS;IACT,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,eAAe;AACnB;;AAEA;IACI,aAAa;IACb,kCAAkC;IAClC,sCAAsC;IACtC,qBAAqB;IACrB,+BAA+B;IAC/B,cAAc;IACd,eAAe;IACf,iBAAiB;IACjB,gBAAgB;IAChB,kBAAkB;IAClB,mBAAmB;IACnB,qBAAqB;IACrB,kBAAkB;AACtB;;AAEA;IACI,sCAAsC;IACtC,yBAAyB;IACzB,oBAAoB;AACxB;;AAEA;IACI,sCAAsC;IACtC,aAAa;IACb,sBAAsB;IACtB,2BAA2B;IAC3B,yBAAyB;IACzB,gBAAgB;AACpB;;;;;AAKA;;;GAGG;;AAEH;IACI,gBAAgB;IAChB,mBAAmB;IACnB,UAAU;IACV,kCAAkC;IAClC,yBAAyB;AAC7B;;AAEA;IACI,kCAAkC;AACtC;;AAEA;IACI,oCAAoC;AACxC;;AAEA;IACI,aAAa;IACb,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,qBAAqB;IACrB,gBAAgB;IAChB,WAAW;AACf","sourcesContent":["/* div {\r\n background-color: rgb(215, 236, 250);\r\n} */\r\n\r\n*{\r\n    box-sizing: border-box;\r\n}\r\n\r\n:root {\r\n    --main-fg-color: #fbfbfb;\r\n    /* --main-fg-color:#f2f2f2; */\r\n    --main-bg-color: #f2f2f2;\r\n    --main-figure-color: #333;\r\n    --button-default-color:rgb(248 250 251);\r\n    --button-hover-color:rgb(240, 255, 247);\r\n    --button-active-color:rgb(255, 255, 240);\r\n    --delete-button-hover-color:rgb(253, 199, 199);\r\n    --delete-button-active-color:rgb(240, 90, 90);\r\n}\r\n\r\n\r\n\r\nbody {\r\n    margin: 0;\r\n    display: flex;\r\n    background-color: var(--main-bg-color);\r\n}\r\n\r\ndiv button {\r\n    font-size: 20px;\r\n}\r\n\r\n.mainContainer {\r\n    display: grid;\r\n    grid-template-columns: 1fr 3fr 1fr;\r\n    background-color: var(--main-bg-color);\r\n    grid-column-gap: 20px;\r\n    color: var(--main-figure-color);\r\n    margin: 0 auto;\r\n    margin-top:20px;\r\n    min-height: 100vh;\r\n    min-width: 768px;\r\n    padding-left: 10px;\r\n    padding-right: 10px;\r\n    padding-bottom: 120px;\r\n    text-align: center;\r\n}\r\n\r\n.templatesContainer {\r\n    background-color: var(--main-fg-color);\r\n    border: solid 1px #6c6349;\r\n    padding-bottom: 40px;\r\n}\r\n\r\n.presetsSideBarContainer {\r\n    background-color: var(--main-fg-color);\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: flex-start;\r\n    border: solid 1px #6c6349;\r\n    max-width: 300px;\r\n}\r\n\r\n\r\n\r\n\r\n/* .fileInputContainer {\r\n    margin-top: 20px;\r\n    margin-bottom: 10px;\r\n} */\r\n\r\ndiv button {\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n    width:100%;\r\n    background-color: rgb(251 252 255);\r\n    border: 1px solid #d3d3d3;\r\n}\r\n\r\ndiv button:hover {\r\n    background-color: rgb(240 255 240);\r\n}\r\n\r\ndiv button:active {\r\n    background-color: rgb(249, 250, 196);\r\n}\r\n\r\n.presetsButtonsContainer {\r\n    padding: 10px;\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.textParseArea {\r\n    resize: vertical;\r\n    width: 300px;\r\n}\r\n\r\n.textParseAreaContainer {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.NamingFileStyle {\r\n    /* font-size: 20px; */\r\n    margin-top: 10px;\r\n    width: 100%;\r\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"mainContainer": `ItourmMtefo1XjDifJzz`,
@@ -55581,9 +55616,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _TemplatesModule_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TemplatesModule.jsx */ "./src/TemplatesModule.jsx");
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var _AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppContainer.jsx */ "./src/AppContainer.jsx");
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 
 // import ReactDOM from "react-dom/client";
+
 
 
 
@@ -55605,8 +55642,8 @@ __webpack_require__.r(__webpack_exports__);
 // }
 
 const domNode = document.getElementById('react-root');
-const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_2__.createRoot)(domNode);
-root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_TemplatesModule_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_3__.createRoot)(domNode);
+root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_AppContainer_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
   tryNumber: "2"
 }));
 // root.render(<App tryNumber="2+" />);
